@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { Link } from "wouter";
 import type { BlogPost } from "@shared/schema";
 
 export default function Blog() {
@@ -29,7 +30,7 @@ export default function Blog() {
       ) : (
         <div className="space-y-12">
           {posts.map(post => (
-            <article key={post.id} className="group cursor-pointer" data-testid={`card-post-${post.id}`}>
+            <Link key={post.id} href={`/blog/${post.id}`} className="block group cursor-pointer" data-testid={`card-post-${post.id}`}>
               <div className="flex items-baseline justify-between mb-2 border-b border-black pb-2">
                 <span className="font-mono text-xs opacity-50">
                   {format(new Date(post.createdAt), "MMM dd, yyyy")}
@@ -42,7 +43,7 @@ export default function Blog() {
               <p className="font-mono text-sm opacity-70 leading-relaxed" data-testid={`text-post-excerpt-${post.id}`}>
                 {post.excerpt}
               </p>
-            </article>
+            </Link>
           ))}
         </div>
       )}

@@ -7,6 +7,11 @@ interface StickyNoteProps {
   className?: string;
   rotate?: number;
   delay?: number;
+  onClick?: () => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  role?: string;
+  tabIndex?: number;
+  "aria-label"?: string;
 }
 
 const colors = {
@@ -22,7 +27,12 @@ export function StickyNote({
   color = "yellow", 
   className, 
   rotate = 0,
-  delay = 0 
+  delay = 0,
+  onClick,
+  onKeyDown,
+  role,
+  tabIndex,
+  "aria-label": ariaLabel,
 }: StickyNoteProps) {
   return (
     <motion.div
@@ -45,6 +55,11 @@ export function StickyNote({
         "p-6 shadow-brutal border-2 border-black relative",
         className
       )}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      role={role}
+      tabIndex={tabIndex}
+      aria-label={ariaLabel}
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-black/5 -translate-y-2 blur-[1px] rounded-full opacity-0 hover:opacity-100 transition-opacity" />
       {children}

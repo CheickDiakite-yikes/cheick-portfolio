@@ -15,6 +15,11 @@ const links = [
   { href: "/admin", label: "Admin", color: "bg-stone-200" },
 ];
 
+function isLinkActive(location: string, href: string): boolean {
+  if (href === "/") return location === "/";
+  return location === href || location.startsWith(`${href}/`);
+}
+
 export function Navigation() {
   const [location] = useLocation();
 
@@ -31,7 +36,7 @@ export function Navigation() {
 
       <div className="flex flex-col gap-4">
         {links.map((link) => {
-          const isActive = location === link.href;
+          const isActive = isLinkActive(location, link.href);
           return (
             <Link key={link.href} href={link.href} className="group relative flex items-center">
                 {isActive && (
@@ -125,7 +130,7 @@ export function MobileNav() {
                     className={cn(
                       "block p-6 border-2 border-black shadow-brutal-sm font-mono text-xl uppercase font-bold tracking-wider active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all",
                       link.color,
-                      location === link.href && "ring-4 ring-black ring-offset-2"
+                      isLinkActive(location, link.href) && "ring-4 ring-black ring-offset-2"
                     )}
                   >
                     <motion.span
@@ -152,7 +157,7 @@ export function MobileNav() {
           className="md:hidden fixed bottom-0 left-0 w-full bg-stone-100/80 backdrop-blur-md border-t-2 border-black p-4 z-40 flex justify-between items-center px-6"
         >
           <span className="font-mono text-xs font-bold uppercase">
-             {links.find(l => l.href === location)?.label || "Portfolio"}
+             {links.find((link) => isLinkActive(location, link.href))?.label || "Portfolio"}
           </span>
           <span className="font-hand text-xs opacity-50">Tap menu to explore ⤴</span>
         </motion.div>

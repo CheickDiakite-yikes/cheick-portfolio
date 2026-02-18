@@ -5,13 +5,21 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Lock, Plus, Trash2, Eye, EyeOff, Mail, MailOpen, X } from "lucide-react";
+import { Lock, Plus, Trash2, Eye, EyeOff, Mail, MailOpen, X, LogOut } from "lucide-react";
 import type { Project, BlogPost, GuestbookEntry, ContactMessage } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ADMIN_PASSWORD = "admin123";
+type AdminSession = {
+  authenticated: boolean;
+};
 
-function AdminDashboard() {
+function AdminDashboard({
+  onLogout,
+  isLoggingOut,
+}: {
+  onLogout: () => void;
+  isLoggingOut: boolean;
+}) {
   const [activeTab, setActiveTab] = useState<"projects" | "blog" | "guestbook" | "messages">("projects");
   const { toast } = useToast();
 
@@ -26,6 +34,15 @@ function AdminDashboard() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="font-serif text-4xl">Admin Panel</h1>
+        <Button
+          onClick={onLogout}
+          disabled={isLoggingOut}
+          className="rounded-none bg-black text-white font-mono text-xs uppercase tracking-wider"
+          data-testid="button-admin-logout"
+        >
+          <LogOut size={14} />
+          {isLoggingOut ? "Logging Out..." : "Logout"}
+        </Button>
       </div>
 
       <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
@@ -352,21 +369,63 @@ function MessagesAdmin() {
 }
 
 export default function Admin() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const { toast } = useToast();
+  const { data: session, isLoading: isSessionLoading } = useQuery<AdminSession>({
+    queryKey: ["/api/admin/session"],
+  });
+
+  const isLoggedIn = Boolean(session?.authenticated);
+
+  const loginMutation = useMutation({
+    mutationFn: async (value: string) => {
+      await apiRequest("POST", "/api/admin/login", { password: value });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/session"] });
+      toast({ title: "Access Granted" });
+      setPassword("");
+    },
+    onError: () => {
+      toast({ title: "Access Denied", description: "Incorrect password.", variant: "destructive" });
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await apiRequest("POST", "/api/admin/logout");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/session"] });
+      queryClient.clear();
+      toast({ title: "Logged out" });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to log out.", variant: "destructive" });
+    },
+  });
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsLoggedIn(true);
-    } else {
-      toast({ title: "Access Denied", description: "Incorrect password.", variant: "destructive" });
-    }
+    loginMutation.mutate(password);
+  }
+
+  function handleLogout() {
+    logoutMutation.mutate();
+  }
+
+  if (isSessionLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="w-full max-w-md bg-stone-200 border-2 border-black p-8 shadow-brutal text-center">
+          <p className="font-mono text-sm uppercase tracking-wider opacity-70">Checking session...</p>
+        </div>
+      </div>
+    );
   }
 
   if (isLoggedIn) {
-    return <AdminDashboard />;
+    return <AdminDashboard onLogout={handleLogout} isLoggingOut={logoutMutation.isPending} />;
   }
 
   return (
@@ -391,13 +450,18 @@ export default function Admin() {
               data-testid="input-admin-password"
             />
           </div>
-          <Button type="submit" className="w-full bg-black text-white rounded-none font-mono hover:bg-stone-800" data-testid="button-admin-login">
-            LOGIN
+          <Button
+            type="submit"
+            disabled={loginMutation.isPending}
+            className="w-full bg-black text-white rounded-none font-mono hover:bg-stone-800"
+            data-testid="button-admin-login"
+          >
+            {loginMutation.isPending ? "VERIFYING..." : "LOGIN"}
           </Button>
         </form>
         
         <p className="font-mono text-xs text-center mt-4 opacity-40">
-          Default password: admin123
+          Admin auth is server-verified.
         </p>
       </div>
     </div>
