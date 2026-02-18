@@ -26,8 +26,8 @@ export default function Home() {
           <span className="font-hand text-xl opacity-40 rotate-[-2deg] inline-block">Cheick Diakite</span>
         </div>
         <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9]">
-          AI Product<br />
-          <span className="italic font-light opacity-50">&</span> Engineering
+          AI, Product<br />
+          <span className="italic font-light opacity-50">&</span> Finance
         </h1>
         <p className="font-mono text-xl mt-8 max-w-xl">
           Google DeepMind Hackathon Winner blending $11B+ in IB/PE M&A experience with hands-on AI engineering and 0→1 product execution.
