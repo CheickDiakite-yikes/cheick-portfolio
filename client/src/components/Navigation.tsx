@@ -31,8 +31,7 @@ export function Navigation() {
         {links.map((link) => {
           const isActive = location === link.href;
           return (
-            <Link key={link.href} href={link.href}>
-              <a className="group relative flex items-center">
+            <Link key={link.href} href={link.href} className="group relative flex items-center">
                 {isActive && (
                   <motion.div
                     layoutId="nav-indicator"
@@ -52,7 +51,6 @@ export function Navigation() {
                   className="absolute right-0 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" 
                   size={16} 
                 />
-              </a>
             </Link>
           );
         })}
@@ -119,20 +117,23 @@ export function MobileNav() {
                 <h2 className="font-serif text-4xl mb-4 italic">Menu.</h2>
                 
                 {links.map((link, i) => (
-                  <Link key={link.href} href={link.href}>
-                    <motion.a
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "block p-6 border-2 border-black shadow-brutal-sm font-mono text-xl uppercase font-bold tracking-wider active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all",
+                      link.color,
+                      location === link.href && "ring-4 ring-black ring-offset-2"
+                    )}
+                  >
+                    <motion.span
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.05 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={cn(
-                        "block p-6 border-2 border-black shadow-brutal-sm font-mono text-xl uppercase font-bold tracking-wider active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all",
-                        link.color,
-                        location === link.href && "ring-4 ring-black ring-offset-2"
-                      )}
+                      className="block"
                     >
                       {link.label}
-                    </motion.a>
+                    </motion.span>
                   </Link>
                 ))}
               </div>

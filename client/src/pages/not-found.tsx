@@ -9,10 +9,8 @@ export default function NotFound() {
         <p className="font-hand text-xl mb-6">
           "I looked everywhere, but I couldn't find this page. Maybe it was torn out?"
         </p>
-        <Link href="/">
-          <a className="inline-block border-2 border-black px-4 py-2 hover:bg-black hover:text-white transition-colors font-mono uppercase text-sm font-bold">
+        <Link href="/" className="inline-block border-2 border-black px-4 py-2 hover:bg-black hover:text-white transition-colors font-mono uppercase text-sm font-bold">
             Return Home
-          </a>
         </Link>
       </div>
     </div>

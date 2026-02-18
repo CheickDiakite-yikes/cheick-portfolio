@@ -46,20 +46,16 @@ export default function Home() {
         <StickyNote color="pink" rotate={3} delay={0.2} className="min-h-[200px] flex flex-col justify-between">
           <span className="font-mono text-xs opacity-50">LATEST WORK</span>
           <p className="font-serif text-xl italic">"The brutalist approach to modern web design."</p>
-          <Link href="/projects">
-            <a className="self-end hover:underline font-mono text-sm flex items-center gap-1">
+          <Link href="/projects" className="self-end hover:underline font-mono text-sm flex items-center gap-1">
               View Projects <ArrowRight size={14} />
-            </a>
           </Link>
         </StickyNote>
 
         <StickyNote color="blue" rotate={-1} delay={0.4} className="hidden lg:flex min-h-[200px] flex-col justify-between">
           <span className="font-mono text-xs opacity-50">CONTACT</span>
           <p className="font-mono text-lg break-all">hello@portfolio.design</p>
-          <Link href="/contact">
-             <a className="self-end px-3 py-1 bg-black text-white font-mono text-xs hover:bg-black/80 transition-colors">
+          <Link href="/contact" className="self-end px-3 py-1 bg-black text-white font-mono text-xs hover:bg-black/80 transition-colors">
                SAY HELLO
-             </a>
           </Link>
         </StickyNote>
       </div>
