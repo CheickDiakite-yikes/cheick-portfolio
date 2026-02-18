@@ -6,12 +6,12 @@ import { Typewriter } from "@/components/Typewriter";
 
 export default function Home() {
   const activities = [
-    "Building the next big thing in AI interfaces.",
-    "Designing and drawing a new product.",
-    "Reading latest LLM papers.",
-    "Working out and meditating.",
-    "Mentoring the youth.",
-    "Watching a nice movie."
+    "Building LLM-powered products end-to-end.",
+    "Designing AI workflows for real users.",
+    "Testing frontier models across OpenAI and Gemini.",
+    "Shipping private equity tooling that saves teams hours.",
+    "Mentoring and learning with other builders.",
+    "Training hard and staying balanced."
   ];
 
   return (
@@ -22,11 +22,11 @@ export default function Home() {
         transition={{ duration: 0.8 }}
       >
         <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9]">
-          Design<br />
-          <span className="italic font-light opacity-50">&</span> Engineer
+          AI Product<br />
+          <span className="italic font-light opacity-50">&</span> Engineering
         </h1>
         <p className="font-mono text-xl mt-8 max-w-xl">
-          Building digital experiences with a focus on motion, interaction, and brutalist aesthetics.
+          Google DeepMind Hackathon Winner blending $11B+ in IB/PE M&A experience with hands-on AI engineering and 0→1 product execution.
         </p>
       </motion.header>
 
@@ -45,7 +45,7 @@ export default function Home() {
 
         <StickyNote color="pink" rotate={3} delay={0.2} className="min-h-[200px] flex flex-col justify-between">
           <span className="font-mono text-xs opacity-50">LATEST WORK</span>
-          <p className="font-serif text-xl italic">"The brutalist approach to modern web design."</p>
+          <p className="font-serif text-xl italic">"AI-native products for investing, education, creativity, and wellness."</p>
           <Link href="/projects" className="self-end hover:underline font-mono text-sm flex items-center gap-1">
               View Projects <ArrowRight size={14} />
           </Link>
@@ -53,7 +53,7 @@ export default function Home() {
 
         <StickyNote color="blue" rotate={-1} delay={0.4} className="hidden lg:flex min-h-[200px] flex-col justify-between">
           <span className="font-mono text-xs opacity-50">CONTACT</span>
-          <p className="font-mono text-lg break-all">hello@portfolio.design</p>
+          <p className="font-mono text-lg break-all">contact@cheickdiakite.com</p>
           <Link href="/contact" className="self-end px-3 py-1 bg-black text-white font-mono text-xs hover:bg-black/80 transition-colors">
                SAY HELLO
           </Link>

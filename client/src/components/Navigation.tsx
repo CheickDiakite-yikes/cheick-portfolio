@@ -9,7 +9,7 @@ const links = [
   { href: "/about", label: "About", color: "bg-pink-200" },
   { href: "/projects", label: "Projects", color: "bg-sky-200" },
   { href: "/resume", label: "Resume", color: "bg-green-200" },
-  { href: "/blog", label: "Blog", color: "bg-purple-200" },
+  { href: "/blog", label: "Blog", color: "bg-amber-200" },
   { href: "/guestbook", label: "Guestbook", color: "bg-orange-200" },
   { href: "/contact", label: "Contact", color: "bg-rose-200" },
   { href: "/admin", label: "Admin", color: "bg-stone-200" },
@@ -21,10 +21,12 @@ export function Navigation() {
   return (
     <nav className="fixed left-0 top-0 h-screen w-64 bg-stone-100 border-r-4 border-black hidden md:flex flex-col p-8 z-50">
       <div className="mb-12">
-        <h1 className="font-serif text-4xl font-bold italic tracking-tighter hover:scale-105 transition-transform cursor-default origin-left">
-          Portfolio.
+        <h1 className="font-serif text-4xl font-bold italic tracking-tighter hover:scale-105 transition-transform cursor-default origin-left leading-none">
+          Cheick
+          <br />
+          Diakite.
         </h1>
-        <p className="font-mono text-xs mt-2 opacity-60">EST. 2026</p>
+        <p className="font-mono text-xs mt-3 opacity-60 uppercase tracking-wider">AI Product + Engineering</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -63,7 +65,7 @@ export function Navigation() {
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           className="font-hand text-sm origin-center inline-block cursor-help"
         >
-          "Make it nice!"
+          "Boardroom -&gt; Code"
         </motion.p>
       </div>
     </nav>
