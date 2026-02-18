@@ -20,7 +20,11 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="relative"
       >
+        <div className="absolute -top-8 left-0">
+          <span className="font-hand text-xl opacity-40 rotate-[-2deg] inline-block">Cheick Diakite</span>
+        </div>
         <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9]">
           AI Product<br />
           <span className="italic font-light opacity-50">&</span> Engineering
