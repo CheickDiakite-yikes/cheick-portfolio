@@ -6,6 +6,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -15,22 +17,25 @@ const formSchema = z.object({
 
 export default function Contact() {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      subject: "",
-      message: "",
+  
+  const mutation = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const res = await apiRequest("POST", "/api/contact", values);
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({ title: "Message Sent", description: "Thanks for reaching out! I'll get back to you soon." });
+      form.reset();
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Failed to send message.", variant: "destructive" });
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: "Message Sent",
-      description: "Thanks for reaching out! I'll get back to you soon.",
-    });
-    form.reset();
-  }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { email: "", subject: "", message: "" },
+  });
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -41,7 +46,7 @@ export default function Contact() {
 
       <div className="bg-white p-8 md:p-12 border-4 border-black shadow-brutal-lg">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit((v) => mutation.mutate(v))} className="space-y-8">
             <FormField
               control={form.control}
               name="email"
@@ -49,7 +54,7 @@ export default function Contact() {
                 <FormItem>
                   <FormLabel className="font-mono text-xs uppercase font-bold tracking-wider">Email Address</FormLabel>
                   <FormControl>
-                    <Input placeholder="hello@example.com" {...field} className="border-x-0 border-t-0 border-b-2 border-black rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all bg-transparent" />
+                    <Input placeholder="hello@example.com" {...field} data-testid="input-contact-email" className="border-x-0 border-t-0 border-b-2 border-black rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all bg-transparent" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -62,7 +67,7 @@ export default function Contact() {
                 <FormItem>
                   <FormLabel className="font-mono text-xs uppercase font-bold tracking-wider">Subject</FormLabel>
                   <FormControl>
-                    <Input placeholder="Project Inquiry" {...field} className="border-x-0 border-t-0 border-b-2 border-black rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all bg-transparent" />
+                    <Input placeholder="Project Inquiry" {...field} data-testid="input-contact-subject" className="border-x-0 border-t-0 border-b-2 border-black rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all bg-transparent" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,14 +80,14 @@ export default function Contact() {
                 <FormItem>
                   <FormLabel className="font-mono text-xs uppercase font-bold tracking-wider">Message</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Tell me about your project..." {...field} className="border-2 border-black rounded-none min-h-[150px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-stone-50" />
+                    <Textarea placeholder="Tell me about your project..." {...field} data-testid="input-contact-message" className="border-2 border-black rounded-none min-h-[150px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-stone-50" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-8 text-lg shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all active:shadow-none active:translate-y-0 active:translate-x-0">
-              Send Message
+            <Button type="submit" disabled={mutation.isPending} data-testid="button-contact-submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-8 text-lg shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all active:shadow-none active:translate-y-0 active:translate-x-0">
+              {mutation.isPending ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </Form>
