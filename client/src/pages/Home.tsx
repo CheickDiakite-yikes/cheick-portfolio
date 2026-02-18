@@ -2,8 +2,18 @@ import { motion } from "framer-motion";
 import { StickyNote } from "@/components/StickyNote";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { Typewriter } from "@/components/Typewriter";
 
 export default function Home() {
+  const activities = [
+    "Building the next big thing in AI interfaces.",
+    "Designing and drawing a new product.",
+    "Reading latest LLM papers.",
+    "Working out and meditating.",
+    "Mentoring the youth.",
+    "Watching a nice movie."
+  ];
+
   return (
     <div className="flex flex-col gap-12 pt-12 md:pt-24">
       <motion.header
@@ -21,10 +31,17 @@ export default function Home() {
       </motion.header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 relative">
-        <StickyNote color="yellow" rotate={-2} className="min-h-[200px] flex flex-col justify-between">
-          <span className="font-mono text-xs opacity-50">CURRENTLY</span>
-          <p className="font-hand text-2xl">Building the next big thing in AI interfaces.</p>
-          <div className="w-8 h-8 rounded-full bg-black/10 self-end" />
+        <StickyNote color="yellow" rotate={-2} className="min-h-[200px] flex flex-col justify-between overflow-hidden">
+          <div className="flex justify-between items-start">
+            <span className="font-mono text-xs opacity-50">CURRENTLY</span>
+            <div className="bg-blue-600 text-white text-[10px] font-bold px-1.5 rounded-sm font-mono">P</div>
+          </div>
+          
+          <div className="relative font-hand text-2xl leading-tight min-h-[3em]">
+             <Typewriter phrases={activities} />
+          </div>
+          
+          <div className="w-8 h-8 rounded-full bg-black/10 self-end mt-4" />
         </StickyNote>
 
         <StickyNote color="pink" rotate={3} delay={0.2} className="min-h-[200px] flex flex-col justify-between">
