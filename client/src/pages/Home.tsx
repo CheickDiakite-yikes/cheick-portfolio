@@ -34,7 +34,6 @@ export default function Home() {
         <StickyNote color="yellow" rotate={-2} className="min-h-[200px] flex flex-col justify-between overflow-hidden">
           <div className="flex justify-between items-start">
             <span className="font-mono text-xs opacity-50">CURRENTLY</span>
-            <div className="bg-blue-600 text-white text-[10px] font-bold px-1.5 rounded-sm font-mono">P</div>
           </div>
           
           <div className="relative font-hand text-2xl leading-tight min-h-[3em]">

@@ -65,8 +65,6 @@ export function Typewriter({
         transition={{ repeat: Infinity, duration: 0.8 }}
         className="inline-block w-[2px] h-[1em] bg-blue-600 align-middle ml-1"
       />
-      {/* Selection highlight effect simulating text editor focus */}
-      <div className="absolute inset-0 bg-blue-200/30 -z-10 pointer-events-none w-full h-full" />
     </div>
   );
 }
