@@ -10,6 +10,9 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import type { GuestbookEntry } from "@shared/schema";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -18,6 +21,7 @@ const formSchema = z.object({
 
 export default function Guestbook() {
   const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false);
   
   const { data: entries = [], isLoading } = useQuery<GuestbookEntry[]>({
     queryKey: ["/api/guestbook"],
@@ -40,6 +44,7 @@ export default function Guestbook() {
       queryClient.invalidateQueries({ queryKey: ["/api/guestbook"] });
       toast({ title: "Signed!", description: "Your note has been added to the wall." });
       form.reset();
+      setIsOpen(false);
     },
     onError: () => {
       toast({ title: "Error", description: "Failed to post your note.", variant: "destructive" });
@@ -59,41 +64,57 @@ export default function Guestbook() {
       </p>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-1 bg-white p-8 border-2 border-black shadow-brutal h-fit sticky top-8">
-          <h2 className="font-serif text-2xl mb-6">Sign the book</h2>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit((v) => mutation.mutate(v))} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-mono text-xs uppercase font-bold">Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your name" {...field} data-testid="input-guestbook-name" className="border-black rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-mono text-xs uppercase font-bold">Message</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Write something nice..." {...field} data-testid="input-guestbook-message" className="border-black rounded-none min-h-[100px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={mutation.isPending} data-testid="button-guestbook-submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-6">
-                {mutation.isPending ? "Posting..." : "Post Note"}
-              </Button>
-            </form>
-          </Form>
+        <div className="lg:col-span-1 h-fit sticky top-8">
+          <Collapsible
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            className="bg-white border-2 border-black shadow-brutal overflow-hidden"
+          >
+            <CollapsibleTrigger asChild>
+              <button className="w-full p-6 flex items-center justify-between hover:bg-stone-50 transition-colors group" data-testid="button-toggle-form">
+                <h2 className="font-serif text-2xl">Sign the book</h2>
+                {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </button>
+            </CollapsibleTrigger>
+            
+            <CollapsibleContent className="p-6 pt-0 space-y-6">
+              <div className="pt-4 border-t-2 border-black/5">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit((v) => mutation.mutate(v))} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-mono text-xs uppercase font-bold">Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your name" {...field} data-testid="input-guestbook-name" className="border-black rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-mono text-xs uppercase font-bold">Message</FormLabel>
+                          <FormControl>
+                            <Textarea placeholder="Write something nice..." {...field} data-testid="input-guestbook-message" className="border-black rounded-none min-h-[100px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-b-4 transition-all" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit" disabled={mutation.isPending} data-testid="button-guestbook-submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-6">
+                      {mutation.isPending ? "Posting..." : "Post Note"}
+                    </Button>
+                  </form>
+                </Form>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
 
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 content-start">
