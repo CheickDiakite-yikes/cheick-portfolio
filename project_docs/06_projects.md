@@ -54,7 +54,95 @@ An all-in-one sanctuary for emotional growth and self-discovery, combining cutti
 
 ---
 
-## 2. Kumayiri
+## 2. ZeeMe (My AI Companion)
+**Overview:** Multimodal AI companion application with unified text + live voice memory, image-aware chat, personalization, and themeable mobile-first UI.
+
+**Links:**
+- [Live Site](https://zeeme.replit.app)
+- [GitHub](https://github.com/CheickDiakite-yikes/my-ai-companion)
+
+**Tech Stack:** Gemini 3 Flash, Gemini 2.5 Flash Native Audio, React 19, TypeScript, Vite, Express.js, PostgreSQL, Drizzle ORM, Replit Object Storage
+
+### Readme
+# ZeeMe
+## Multimodal AI Companion
+
+A production-oriented AI companion that combines text chat, low-latency live voice, image context, and persistent memory in one stitched conversation experience.
+
+### CORE CAPABILITIES
+- Unified text + voice conversation threads
+- Live voice interruption handling with Gemini native audio
+- Image-aware chat in text mode and camera-frame sharing in live sessions
+- Personalization settings for profile, response style, and voice selection
+- Session auth, quota controls, and usage analytics
+
+### TECHNICAL HIGHLIGHTS
+- Single Express + Vite runtime topology for dev and production
+- Streaming NDJSON text responses with persisted assistant parts
+- PostgreSQL schema for users, conversations, messages, attachments, profiles, and usage events
+- Object storage media pipeline with local fallback support
+
+---
+
+## 3. Sparkie (Insparkie)
+**Overview:** AI product planning workspace that turns raw startup ideas into structured outputs including market research, technical strategy, PRD, UI/UX direction, and implementation prompts.
+
+**Links:**
+- [Live Site](https://insparkie.replit.app)
+- [GitHub](https://github.com/CheickDiakite-yikes/sparkie)
+
+**Tech Stack:** Gemini 2.5 Flash, Gemini 3 Pro Image, React 19, TypeScript, Vite, Express.js, PostgreSQL, Replit Object Storage, Tailwind CSS
+
+### Readme
+# Sparkie / Insparkie
+## AI Product Planning Workspace
+
+An authenticated multi-user workspace for founders and operators to transform rough idea notes into build-ready planning artifacts.
+
+### CORE CAPABILITIES
+- Idea management with notes, tags, status, and workspace metadata
+- Asynchronous AI pipeline for executive summary, market research, PRD, UI/UX guidance, and one-shot build prompts
+- Per-idea AI chat with blueprint/tool updates
+- Concept image generation and deletion flow backed by object storage
+- Monthly quota controls and usage telemetry with event-level token and cost tracking
+
+### PLATFORM DETAILS
+- Session auth with email/password
+- PostgreSQL-backed data model for ideas, analysis, chats, images, and AI usage events
+- Structured observability with request tracing and diagnostics
+
+---
+
+## 4. Simili (AI Life Simulator)
+**Overview:** Hyper-realistic AI life simulation game where players experience thousands of possible life paths shaped by environment, luck, and choice.
+
+**Links:**
+- [Live Site](https://simili-ai.replit.app)
+- [GitHub](https://github.com/CheickDiakite-yikes/ai-life-simulator)
+
+**Tech Stack:** Gemini API, React 19, TypeScript, Vite, Express 5, PostgreSQL, Drizzle ORM, Replit Object Storage, Tailwind CSS
+
+### Readme
+# Simili
+## AI Life Simulator
+
+A narrative + systems simulation game that generates believable, emotionally grounded life journeys from birth to death across multiple game modes.
+
+### CORE CAPABILITIES
+- Three game modes: Real Life, Custom Start, and Alternative worlds
+- Stage-based progression across full life arcs
+- Persistent cloud saves with secure session auth
+- AI-generated narrative events, visuals, clips, and voice narration
+- Coherence systems for causal continuity and meaningful long-term consequences
+
+### SYSTEM DESIGN
+- React + TypeScript frontend with animation-rich experience
+- Express backend with REST APIs for auth, saves, and game state
+- PostgreSQL for users/sessions/saves and object storage for generated media
+
+---
+
+## 5. Kumayiri
 **Overview:** AI-powered comic creation platform with character consistency, Story Bible system, and Veo3 video animations. Winner among 831 global submissions at Google DeepMind Hackathon.
 
 **Links:**
@@ -102,7 +190,7 @@ Create stunning comic books with AI-powered visual generation, intelligent chara
 
 ---
 
-## 3. DiDi
+## 6. DiDi
 **Overview:** The world's first open-source autonomous PE firm—AI agents for deal sourcing, deep diligence, LBO modeling, and IC memos. Cuts first-draft time by 70-90%.
 
 **Links:**
@@ -157,7 +245,7 @@ Start by typing: *"Find me 3 profitable healthcare services companies in Texas."
 
 ---
 
-## 4. EchoLingo
+## 7. EchoLingo
 **Overview:** AI-powered language learning platform for ELL students—empowers teachers with AI assignment generation, smart grading, and personalized parrot-guided feedback.
 
 **Links:**
@@ -195,7 +283,7 @@ A comprehensive educational platform designed specifically for English Language 
 
 ---
 
-## 5. Mosaic
+## 8. Mosaic
 **Overview:** AI-powered photo editor built with React 19 and Gemini 2.5—features precise localized retouching, creative style filters, image mixing, smart cropping, and background removal using natural language.
 
 **Links:**
@@ -238,7 +326,7 @@ Retouch, apply creative filters, mix images, and make professional adjustments u
 
 ---
 
-## 6. AuroraTravel
+## 9. AuroraTravel
 **Overview:** Intelligent travel orchestration platform that transforms dreams into actonable, time-sequenced itineraries. Features interactive Google Maps, Travel Buddy profiles, and 3D globe visualization.
 
 **Links:**
@@ -283,7 +371,7 @@ Transforms open-ended travel dreams into actionable, visually immersive itinerar
 
 ---
 
-## 7. TeaClass
+## 10. TeaClass
 **Overview:** Intelligent lesson planning platform for K-12 ELL educators—generates standards-aligned unit plans, differentiated worksheets, presentations, and visual vocabulary with Gemini 2.5.
 
 **Links:**
@@ -327,7 +415,7 @@ An intelligent platform designed specifically for English Language Learner (ELL)
 
 ---
 
-## 8. LucentHire
+## 11. LucentHire
 **Overview:** AI-powered resume analysis platform using GPT-4o and LlamaParse—bulk upload 50+ resumes, intelligent job matching, candidate ranking, and detailed scoring insights.
 
 **Links:**
@@ -373,7 +461,7 @@ An intelligent hiring platform that leverages AI to automatically analyze resume
 
 ---
 
-## 9. Narra
+## 12. Narra
 **Overview:** Multimodal AI storytelling platform—weaves custom illustrated books with consistent characters, artwork, and audio narration using Gemini 3 Pro.
 
 **Links:**
@@ -412,7 +500,7 @@ A multimodal storytelling platform that weaves custom illustrated books page-by-
 
 ---
 
-## 10. Predi AI
+## 13. Predi AI
 **Overview:** AI-native marketing OS—autonomous CMO using Gemini 3 Pro and Veo 3.1 to generate on-brand strategy, copy, high-fidelity images, and cinematic video.
 
 **Links:**
@@ -457,7 +545,7 @@ An autonomous CMO that fuses Liquid Glassmorphic Neo-Brutalism aesthetics with G
 
 ---
 
-## 11. Apex Capital AI
+## 14. Apex Capital AI
 **Overview:** Sovereign Intelligence Terminal—AI-native Bloomberg alternative. Autonomous financial OS for reconstructing institutional-grade models, detecting forensic anomalies, and formulating investment theses.
 
 **Links:**
@@ -504,7 +592,7 @@ Operates via a coordinated swarm of specialized sub-agents:
 
 ---
 
-## 12. ADIOS
+## 15. ADIOS
 **Overview:** Agentic Director's Intelligent Output Studio—automates the entire video commercial pipeline with AI Director scripts, visual continuity engines, and Veo 3.1 video generation.
 
 **Links:**
@@ -544,7 +632,7 @@ A world-class platform that automates the professional commercial pipeline—act
 
 ---
 
-## 13. Shorty
+## 16. Shorty
 **Overview:** AI-powered short video studio—transforms simple topics into polished HD videos with script, visuals, subtitles, and music. Built for creators.
 
 **Tech Stack:** GPT-4o-mini, Azure TTS, Flask, React, PostgreSQL, MoviePy, Pexels API
@@ -576,7 +664,7 @@ Automated platform that transforms keywords into complete short-form videos with
 
 ---
 
-## 14. PokePals
+## 17. PokePals
 **Overview:** Identify your friends as collectible monster trading cards! AI analyzes photos to generate unique stats, types, moves, and rarities based on the environment.
 
 **Links:**
