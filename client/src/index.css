@@ -11,14 +11,21 @@
   --font-hand: 'Architects Daughter', cursive;
 
   /* Colors - H S% L% format */
-  --color-paper: 40 20% 94%;      /* Warm creamy paper */
-  --color-paper-dark: 40 10% 85%; /* Slightly darker paper for depth */
-  --color-ink: 0 0% 10%;          /* Soft black ink */
+  --color-brand-orange: 26 59% 60%;  /* DB8F59 */
+  --color-brand-brown: 20 44% 36%;   /* 834D33 */
+  --color-brand-dark: 0 20% 16%;     /* 302020 */
+  --color-brand-green: 74 25% 49%;   /* 929456 */
+  --color-brand-yellow: 38 72% 65%;  /* EBBA62 */
+  --color-brand-cream: 48 71% 91%;   /* F7E7B4 */
+
+  --color-paper: var(--color-brand-cream);
+  --color-paper-dark: 38 72% 65%;
+  --color-ink: var(--color-brand-dark);
   
-  --color-sticky-yellow: 50 90% 65%;
-  --color-sticky-pink: 330 90% 75%;
-  --color-sticky-blue: 190 80% 70%;
-  --color-sticky-green: 140 70% 70%;
+  --color-sticky-yellow: var(--color-brand-yellow);
+  --color-sticky-pink: var(--color-brand-orange);
+  --color-sticky-blue: var(--color-brand-green);
+  --color-sticky-green: var(--color-brand-brown);
 
   /* Design System Colors Mapped */
   --color-background: var(--color-paper);
@@ -63,8 +70,8 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    background-color: hsl(40 20% 94%);
-    background-image: radial-gradient(#00000015 1px, transparent 1px);
+    background-color: hsl(var(--color-brand-cream));
+    background-image: radial-gradient(hsl(var(--color-brand-dark) / 0.1) 1px, transparent 1px);
     background-size: 24px 24px;
   }
   
