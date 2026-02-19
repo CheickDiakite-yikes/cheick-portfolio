@@ -120,6 +120,7 @@ function FilterDropdown({
 export default function Projects() {
   const [, setLocation] = useLocation();
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
@@ -149,40 +150,65 @@ export default function Projects() {
     <div>
       <h1 className="font-serif text-5xl md:text-7xl mb-8">Selected Works.</h1>
 
-      <div className="mb-10 border-2 border-black bg-white/80 shadow-brutal p-4 md:p-6" data-testid="filter-bar">
-        <div className="flex items-center justify-between mb-4">
+      <div className="mb-10 border-2 border-black bg-white/80 shadow-brutal" data-testid="filter-bar">
+        <button
+          onClick={() => setFilterOpen(!filterOpen)}
+          className="w-full flex items-center justify-between p-4 md:px-6 md:py-4 cursor-pointer hover:bg-stone-50 transition-colors"
+          data-testid="button-toggle-filter"
+        >
           <div className="flex items-center gap-3">
             <Filter size={18} className="opacity-60" />
             <span className="font-mono text-xs uppercase tracking-widest opacity-60">Filter by tech</span>
+            {activeFilter && (
+              <span className="bg-black text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+                {activeFilter}
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-3">
             {activeFilter && (
-              <button
-                onClick={() => setActiveFilter(null)}
-                className="flex items-center gap-1 font-mono text-xs bg-black text-white px-3 py-1 hover:bg-black/80 transition-colors"
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveFilter(null);
+                }}
+                className="flex items-center gap-1 font-mono text-xs bg-black text-white px-3 py-1 hover:bg-black/80 transition-colors cursor-pointer"
                 data-testid="button-clear-filter"
               >
                 <X size={12} /> CLEAR
-              </button>
+              </span>
             )}
             <span className="font-mono text-sm font-bold tabular-nums" data-testid="text-project-count">
               {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}
             </span>
+            <ChevronDown size={16} className={`transition-transform duration-200 ${filterOpen ? "rotate-180" : ""}`} />
           </div>
-        </div>
+        </button>
 
-        <div className="flex flex-wrap gap-2">
-          {Object.entries(categoryTags).map(([category, tags]) => (
-            <FilterDropdown
-              key={category}
-              label={category}
-              tags={tags}
-              activeFilter={activeFilter}
-              onSelect={setActiveFilter}
-              projects={projects}
-            />
-          ))}
-        </div>
+        <AnimatePresence>
+          {filterOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div className="flex flex-wrap gap-2 px-4 pb-4 md:px-6 md:pb-5 border-t border-black/10 pt-4">
+                {Object.entries(categoryTags).map(([category, tags]) => (
+                  <FilterDropdown
+                    key={category}
+                    label={category}
+                    tags={tags}
+                    activeFilter={activeFilter}
+                    onSelect={setActiveFilter}
+                    projects={projects}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {isLoading ? (
