@@ -1,6 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { z } from "zod";
+import sharp from "sharp";
 import { storage } from "./storage";
 import { getProjectDocDetailByTitle } from "./projectDocs";
 import {
@@ -25,6 +26,89 @@ function requireAdmin(req: Request, res: Response): boolean {
   }
   res.status(401).json({ message: "Unauthorized" });
   return false;
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function wrapText(text: string, maxCharsPerLine: number, maxLines: number): string[] {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  const lines: string[] = [];
+  let current = "";
+
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxCharsPerLine) {
+      current = next;
+      continue;
+    }
+
+    if (current) {
+      lines.push(current);
+    }
+
+    if (lines.length >= maxLines) {
+      return lines;
+    }
+
+    if (word.length > maxCharsPerLine) {
+      lines.push(word.slice(0, maxCharsPerLine - 1) + "...");
+      current = "";
+    } else {
+      current = word;
+    }
+  }
+
+  if (current && lines.length < maxLines) {
+    lines.push(current);
+  }
+
+  if (lines.length > maxLines) {
+    return lines.slice(0, maxLines);
+  }
+
+  return lines;
+}
+
+function buildBlogOgSvg(title: string, excerpt: string): string {
+  const titleLines = wrapText(title, 32, 4);
+  const excerptLines = wrapText(excerpt, 72, 2);
+  const titleTspans = titleLines
+    .map(
+      (line, index) =>
+        `<tspan x="96" dy="${index === 0 ? 0 : 70}" font-size="58">${escapeXml(line)}</tspan>`,
+    )
+    .join("");
+  const excerptTspans = excerptLines
+    .map(
+      (line, index) =>
+        `<tspan x="96" dy="${index === 0 ? 0 : 40}" font-size="30">${escapeXml(line)}</tspan>`,
+    )
+    .join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${escapeXml(
+    title,
+  )}">
+  <rect width="1200" height="630" fill="#FCFBF7"/>
+  <rect x="32" y="32" width="1136" height="566" rx="0" stroke="#111111" stroke-width="4" fill="none"/>
+  <rect x="96" y="88" width="240" height="40" fill="#FDE68A" stroke="#111111" stroke-width="2"/>
+  <text x="114" y="116" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="2.8">BLOG POST</text>
+  <text x="96" y="220" font-family="'Playfair Display', Georgia, serif" font-weight="700" fill="#111111">
+    ${titleTspans}
+  </text>
+  <text x="96" y="510" font-family="'JetBrains Mono', 'Courier New', monospace" fill="#444444" letter-spacing="0.2">
+    ${excerptTspans}
+  </text>
+  <line x1="96" y1="548" x2="1104" y2="548" stroke="#111111" stroke-width="2" stroke-dasharray="2 10"/>
+  <text x="96" y="582" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="1.8">CHEICK DIAKITE</text>
+</svg>`;
 }
 
 export async function registerRoutes(
@@ -75,6 +159,35 @@ export async function registerRoutes(
       res.clearCookie("portfolio.sid");
       return res.status(204).send();
     });
+  });
+
+  // ---- OPEN GRAPH IMAGES ----
+  app.get("/og/blog/:id.svg", async (req, res) => {
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(400).send("Invalid blog id");
+
+    const post = await storage.getBlogPost(id);
+    if (!post || !post.published) return res.status(404).send("Not found");
+
+    const svg = buildBlogOgSvg(post.title, post.excerpt);
+    res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
+    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
+    return res.status(200).send(svg);
+  });
+
+  app.get("/og/blog/:id.png", async (req, res) => {
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(400).send("Invalid blog id");
+
+    const post = await storage.getBlogPost(id);
+    if (!post || !post.published) return res.status(404).send("Not found");
+
+    const svg = buildBlogOgSvg(post.title, post.excerpt);
+    const png = await sharp(Buffer.from(svg)).png({ quality: 90 }).toBuffer();
+
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
+    return res.status(200).send(png);
   });
 
   // ---- PROJECTS ----
