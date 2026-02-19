@@ -150,7 +150,7 @@ export default function Projects() {
     <div>
       <h1 className="font-serif text-5xl md:text-7xl mb-8">Selected Works.</h1>
 
-      <div className="mb-10 border-2 border-black bg-white/80 shadow-brutal" data-testid="filter-bar">
+      <div className="mb-10 border-2 border-black bg-white/80 shadow-brutal relative z-20 overflow-visible" data-testid="filter-bar">
         <button
           onClick={() => setFilterOpen(!filterOpen)}
           className="w-full flex items-center justify-between p-4 md:px-6 md:py-4 cursor-pointer hover:bg-stone-50 transition-colors"
@@ -192,9 +192,9 @@ export default function Projects() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="overflow-hidden"
+              className="overflow-visible"
             >
-              <div className="flex flex-wrap gap-2 px-4 pb-4 md:px-6 md:pb-5 border-t border-black/10 pt-4">
+              <div className="flex flex-wrap gap-2 px-4 pb-4 md:px-6 md:pb-5 border-t border-black/10 pt-4 relative z-50">
                 {Object.entries(categoryTags).map(([category, tags]) => (
                   <FilterDropdown
                     key={category}
