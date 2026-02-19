@@ -5,7 +5,20 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Lock, Plus, Trash2, Eye, EyeOff, Mail, MailOpen, X, LogOut } from "lucide-react";
+import {
+  Lock,
+  Plus,
+  Trash2,
+  Eye,
+  EyeOff,
+  Mail,
+  MailOpen,
+  X,
+  LogOut,
+  Check,
+  CircleX,
+  RotateCcw,
+} from "lucide-react";
 import type { Project, BlogPost, GuestbookEntry, ContactMessage } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -265,16 +278,49 @@ function BlogAdmin() {
 
 function GuestbookAdmin() {
   const { toast } = useToast();
-  const { data: entries = [] } = useQuery<GuestbookEntry[]>({ queryKey: ["/api/guestbook"] });
+  const { data: entries = [] } = useQuery<GuestbookEntry[]>({ queryKey: ["/api/admin/guestbook"] });
+
+  const statusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: "pending" | "approved" | "rejected" }) => {
+      const res = await apiRequest("PATCH", `/api/guestbook/${id}/status`, { status });
+      return res.json();
+    },
+    onSuccess: (_entry, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/guestbook"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/guestbook"] });
+      toast({
+        title:
+          variables.status === "approved"
+            ? "Entry approved."
+            : variables.status === "rejected"
+              ? "Entry rejected."
+              : "Entry moved to pending.",
+      });
+    },
+  });
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
       await apiRequest("DELETE", `/api/guestbook/${id}`);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/guestbook"] });
       queryClient.invalidateQueries({ queryKey: ["/api/guestbook"] });
       toast({ title: "Entry removed." });
     },
+  });
+
+  const statusRank: Record<GuestbookEntry["status"], number> = {
+    pending: 0,
+    approved: 1,
+    rejected: 2,
+  };
+
+  const sortedEntries = [...entries].sort((a, b) => {
+    if (statusRank[a.status] !== statusRank[b.status]) {
+      return statusRank[a.status] - statusRank[b.status];
+    }
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
   return (
@@ -284,15 +330,61 @@ function GuestbookAdmin() {
         <p className="font-mono opacity-50 text-center py-12">No entries yet.</p>
       ) : (
         <div className="space-y-3">
-          {entries.map(entry => (
+          {sortedEntries.map(entry => (
             <div key={entry.id} className="bg-white border-2 border-black p-4 flex justify-between items-start" data-testid={`row-guestbook-${entry.id}`}>
               <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] mb-2 opacity-60">
+                  Status:{" "}
+                  <span
+                    className={
+                      entry.status === "approved"
+                        ? "text-green-700"
+                        : entry.status === "rejected"
+                          ? "text-red-700"
+                          : "text-amber-700"
+                    }
+                  >
+                    {entry.status}
+                  </span>
+                </p>
                 <p className="font-hand text-lg">"{entry.message}"</p>
                 <p className="font-mono text-xs opacity-50 mt-1">— {entry.name}</p>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => deleteMutation.mutate(entry.id)} data-testid={`button-delete-guestbook-${entry.id}`}>
-                <Trash2 size={16} />
-              </Button>
+              <div className="flex gap-1 ml-4">
+                {entry.status !== "approved" && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => statusMutation.mutate({ id: entry.id, status: "approved" })}
+                    data-testid={`button-approve-guestbook-${entry.id}`}
+                  >
+                    <Check size={16} />
+                  </Button>
+                )}
+                {entry.status !== "rejected" && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => statusMutation.mutate({ id: entry.id, status: "rejected" })}
+                    data-testid={`button-reject-guestbook-${entry.id}`}
+                  >
+                    <CircleX size={16} />
+                  </Button>
+                )}
+                {entry.status !== "pending" && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => statusMutation.mutate({ id: entry.id, status: "pending" })}
+                    data-testid={`button-pending-guestbook-${entry.id}`}
+                  >
+                    <RotateCcw size={16} />
+                  </Button>
+                )}
+                <Button variant="ghost" size="icon" onClick={() => deleteMutation.mutate(entry.id)} data-testid={`button-delete-guestbook-${entry.id}`}>
+                  <Trash2 size={16} />
+                </Button>
+              </div>
             </div>
           ))}
         </div>
@@ -305,9 +397,9 @@ function MessagesAdmin() {
   const { toast } = useToast();
   const { data: messages = [] } = useQuery<ContactMessage[]>({ queryKey: ["/api/contact"] });
 
-  const markReadMutation = useMutation({
-    mutationFn: async (id: number) => {
-      await apiRequest("PATCH", `/api/contact/${id}/read`);
+  const setReadMutation = useMutation({
+    mutationFn: async ({ id, read }: { id: number; read: boolean }) => {
+      await apiRequest("PATCH", `/api/contact/${id}/read`, { read });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
@@ -350,8 +442,22 @@ function MessagesAdmin() {
                   <p className="font-mono text-sm mt-2">{msg.message}</p>
                 </div>
                 <div className="flex gap-1 ml-4">
-                  {!msg.read && (
-                    <Button variant="ghost" size="icon" onClick={() => markReadMutation.mutate(msg.id)} data-testid={`button-mark-read-${msg.id}`}>
+                  {msg.read ? (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setReadMutation.mutate({ id: msg.id, read: false })}
+                      data-testid={`button-mark-unread-${msg.id}`}
+                    >
+                      <Mail size={16} />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setReadMutation.mutate({ id: msg.id, read: true })}
+                      data-testid={`button-mark-read-${msg.id}`}
+                    >
                       <MailOpen size={16} />
                     </Button>
                   )}

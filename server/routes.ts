@@ -1,12 +1,13 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import { z } from "zod";
 import { storage } from "./storage";
 import { getProjectDocDetailByTitle } from "./projectDocs";
 import {
   insertProjectSchema,
   insertBlogPostSchema,
-  insertGuestbookEntrySchema,
   insertContactMessageSchema,
+  guestbookStatusSchema,
 } from "@shared/schema";
 
 function parseId(idParam: string): number | null {
@@ -30,6 +31,21 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  const guestbookSubmissionSchema = z.object({
+    name: z.string().min(2),
+    message: z.string().min(5),
+    color: z.string().optional(),
+    rotate: z.string().optional(),
+  });
+
+  const contactReadSchema = z.object({
+    read: z.boolean().optional(),
+  });
+
+  const guestbookStatusUpdateSchema = z.object({
+    status: guestbookStatusSchema,
+  });
+
   // ---- ADMIN AUTH ----
   app.get("/api/admin/session", (req, res) => {
     res.json({ authenticated: isAdmin(req) });
@@ -170,15 +186,39 @@ export async function registerRoutes(
 
   // ---- GUESTBOOK ----
   app.get("/api/guestbook", async (_req, res) => {
-    const entries = await storage.getGuestbookEntries();
+    const entries = await storage.getGuestbookEntries(true);
+    res.json(entries);
+  });
+
+  app.get("/api/admin/guestbook", async (req, res) => {
+    if (!requireAdmin(req, res)) return;
+    const entries = await storage.getGuestbookEntries(false);
     res.json(entries);
   });
 
   app.post("/api/guestbook", async (req, res) => {
-    const parsed = insertGuestbookEntrySchema.safeParse(req.body);
+    const parsed = guestbookSubmissionSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ message: parsed.error.message });
-    const entry = await storage.createGuestbookEntry(parsed.data);
+    const entry = await storage.createGuestbookEntry({
+      name: parsed.data.name,
+      message: parsed.data.message,
+      color: parsed.data.color ?? "yellow",
+      rotate: parsed.data.rotate ?? "0",
+    });
     res.status(201).json(entry);
+  });
+
+  app.patch("/api/guestbook/:id/status", async (req, res) => {
+    if (!requireAdmin(req, res)) return;
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(400).json({ message: "Invalid guestbook id" });
+
+    const parsed = guestbookStatusUpdateSchema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ message: parsed.error.message });
+
+    const updated = await storage.updateGuestbookEntryStatus(id, parsed.data.status);
+    if (!updated) return res.status(404).json({ message: "Guestbook entry not found" });
+    res.json(updated);
   });
 
   app.delete("/api/guestbook/:id", async (req, res) => {
@@ -207,7 +247,9 @@ export async function registerRoutes(
     if (!requireAdmin(req, res)) return;
     const id = parseId(req.params.id);
     if (id === null) return res.status(400).json({ message: "Invalid contact id" });
-    await storage.markContactMessageRead(id);
+    const parsed = contactReadSchema.safeParse(req.body ?? {});
+    if (!parsed.success) return res.status(400).json({ message: parsed.error.message });
+    await storage.setContactMessageRead(id, parsed.data.read ?? true);
     res.status(204).send();
   });
 

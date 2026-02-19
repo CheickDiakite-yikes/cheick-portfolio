@@ -219,10 +219,10 @@ async function seedPortfolioData() {
     for (const entry of guestbookEntries) {
       await client.query(
         `
-        INSERT INTO guestbook_entries (name, message, color, rotate, created_at)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO guestbook_entries (name, message, color, rotate, status, created_at)
+        VALUES ($1, $2, $3, $4, $5, $6)
         `,
-        [entry.name, entry.message, entry.color, entry.rotate, entry.createdAt],
+        [entry.name, entry.message, entry.color, entry.rotate, "approved", entry.createdAt],
       );
     }
 

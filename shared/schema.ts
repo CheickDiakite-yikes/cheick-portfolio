@@ -35,6 +35,7 @@ export const guestbookEntries = pgTable("guestbook_entries", {
   message: text("message").notNull(),
   color: text("color").notNull().default("yellow"),
   rotate: text("rotate").notNull().default("0"),
+  status: text("status", { enum: ["pending", "approved", "rejected"] }).notNull().default("pending"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -65,6 +66,7 @@ export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
 
 export const insertGuestbookEntrySchema = createInsertSchema(guestbookEntries).omit({
   id: true,
+  status: true,
   createdAt: true,
 });
 
@@ -86,6 +88,8 @@ export type BlogPost = typeof blogPosts.$inferSelect;
 
 export type InsertGuestbookEntry = z.infer<typeof insertGuestbookEntrySchema>;
 export type GuestbookEntry = typeof guestbookEntries.$inferSelect;
+export const guestbookStatusSchema = z.enum(["pending", "approved", "rejected"]);
+export type GuestbookStatus = z.infer<typeof guestbookStatusSchema>;
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;

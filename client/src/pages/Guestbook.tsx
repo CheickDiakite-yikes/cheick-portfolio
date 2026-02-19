@@ -42,7 +42,7 @@ export default function Guestbook() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/guestbook"] });
-      toast({ title: "Signed!", description: "Your note has been added to the wall." });
+      toast({ title: "Submitted!", description: "Your note is pending approval." });
       form.reset();
       setIsOpen(false);
     },

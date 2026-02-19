@@ -2,7 +2,7 @@ import {
   type User, type InsertUser,
   type Project, type InsertProject,
   type BlogPost, type InsertBlogPost,
-  type GuestbookEntry, type InsertGuestbookEntry,
+  type GuestbookEntry, type InsertGuestbookEntry, type GuestbookStatus,
   type ContactMessage, type InsertContactMessage,
   users, projects, blogPosts, guestbookEntries, contactMessages,
 } from "@shared/schema";
@@ -27,13 +27,14 @@ export interface IStorage {
   updateBlogPost(id: number, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
   deleteBlogPost(id: number): Promise<void>;
 
-  getGuestbookEntries(): Promise<GuestbookEntry[]>;
+  getGuestbookEntries(approvedOnly?: boolean): Promise<GuestbookEntry[]>;
   createGuestbookEntry(entry: InsertGuestbookEntry): Promise<GuestbookEntry>;
+  updateGuestbookEntryStatus(id: number, status: GuestbookStatus): Promise<GuestbookEntry | undefined>;
   deleteGuestbookEntry(id: number): Promise<void>;
 
   getContactMessages(): Promise<ContactMessage[]>;
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
-  markContactMessageRead(id: number): Promise<void>;
+  setContactMessageRead(id: number, read: boolean): Promise<void>;
   deleteContactMessage(id: number): Promise<void>;
 }
 
@@ -105,13 +106,29 @@ export class DatabaseStorage implements IStorage {
     await db.delete(blogPosts).where(eq(blogPosts.id, id));
   }
 
-  async getGuestbookEntries(): Promise<GuestbookEntry[]> {
+  async getGuestbookEntries(approvedOnly = false): Promise<GuestbookEntry[]> {
+    if (approvedOnly) {
+      return db
+        .select()
+        .from(guestbookEntries)
+        .where(eq(guestbookEntries.status, "approved"))
+        .orderBy(desc(guestbookEntries.createdAt));
+    }
     return db.select().from(guestbookEntries).orderBy(desc(guestbookEntries.createdAt));
   }
 
   async createGuestbookEntry(entry: InsertGuestbookEntry): Promise<GuestbookEntry> {
     const [created] = await db.insert(guestbookEntries).values(entry).returning();
     return created;
+  }
+
+  async updateGuestbookEntryStatus(id: number, status: GuestbookStatus): Promise<GuestbookEntry | undefined> {
+    const [updated] = await db
+      .update(guestbookEntries)
+      .set({ status })
+      .where(eq(guestbookEntries.id, id))
+      .returning();
+    return updated;
   }
 
   async deleteGuestbookEntry(id: number): Promise<void> {
@@ -127,8 +144,8 @@ export class DatabaseStorage implements IStorage {
     return created;
   }
 
-  async markContactMessageRead(id: number): Promise<void> {
-    await db.update(contactMessages).set({ read: true }).where(eq(contactMessages.id, id));
+  async setContactMessageRead(id: number, read: boolean): Promise<void> {
+    await db.update(contactMessages).set({ read }).where(eq(contactMessages.id, id));
   }
 
   async deleteContactMessage(id: number): Promise<void> {
