@@ -3,7 +3,7 @@ import { PageTransition } from "./PageTransition";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-yellow-300 selection:text-black overflow-x-hidden">
+    <div className="min-h-screen bg-[hsl(var(--color-brand-cream)/0.82)] text-[hsl(var(--color-brand-dark))] font-sans selection:bg-[hsl(var(--color-brand-yellow))] selection:text-black overflow-x-hidden">
       {/* Grain Overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-20 mix-blend-multiply z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       

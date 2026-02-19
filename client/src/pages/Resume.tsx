@@ -130,7 +130,7 @@ const sideSections = {
 
 export default function Resume() {
   return (
-    <div className="max-w-5xl mx-auto bg-white p-8 md:p-12 shadow-brutal-lg border-2 border-black my-8 relative">
+    <div className="max-w-5xl mx-auto bg-[hsl(var(--color-brand-cream))] p-8 md:p-12 shadow-brutal-lg border-2 border-black my-8 relative">
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply" />
 
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 mb-10 border-b-4 border-black pb-8">
@@ -145,7 +145,7 @@ export default function Resume() {
 
         <a
           href="mailto:contact@cheickdiakite.com?subject=Resume%20Request"
-          className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 font-mono text-xs hover:bg-stone-800 transition-colors w-fit"
+          className="inline-flex items-center gap-2 bg-black text-[hsl(var(--color-brand-cream))] px-4 py-2 font-mono text-xs hover:bg-[hsl(var(--color-brand-brown))] transition-colors w-fit"
         >
           <Download size={14} />
           REQUEST PDF

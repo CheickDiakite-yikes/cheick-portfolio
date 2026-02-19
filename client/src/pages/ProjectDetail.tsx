@@ -42,9 +42,9 @@ export default function ProjectDetail() {
   if (isLoading) {
     return (
       <div className="max-w-5xl mx-auto space-y-6 animate-pulse">
-        <div className="h-8 w-32 bg-stone-300" />
-        <div className="h-16 w-2/3 bg-stone-200" />
-        <div className="h-40 w-full bg-stone-200" />
+        <div className="h-8 w-32 bg-[hsl(var(--color-brand-yellow)/0.58)]" />
+        <div className="h-16 w-2/3 bg-[hsl(var(--color-brand-yellow)/0.42)]" />
+        <div className="h-40 w-full bg-[hsl(var(--color-brand-yellow)/0.42)]" />
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function ProjectDetail() {
   if (!data || error) {
     return (
       <div className="max-w-3xl mx-auto">
-        <Link href="/projects" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-white transition-colors mb-8">
+        <Link href="/projects" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors mb-8">
           <ArrowLeft size={14} />
           Back to Projects
         </Link>
@@ -67,7 +67,7 @@ export default function ProjectDetail() {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-        <Link href="/projects" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-white transition-colors mb-6">
+        <Link href="/projects" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors mb-6">
           <ArrowLeft size={14} />
           Back to Projects
         </Link>
@@ -80,7 +80,7 @@ export default function ProjectDetail() {
         <motion.section
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white border-4 border-black shadow-brutal p-6 md:p-8 space-y-6"
+          className="bg-[hsl(var(--color-brand-cream))] border-4 border-black shadow-brutal p-6 md:p-8 space-y-6"
         >
           <div>
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] opacity-60 mb-3">Project Links</h2>
@@ -94,7 +94,7 @@ export default function ProjectDetail() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border-2 border-black px-3 py-2 font-mono text-xs uppercase tracking-wider hover:bg-yellow-200 transition-colors"
+                    className="inline-flex items-center gap-2 border-2 border-black px-3 py-2 font-mono text-xs uppercase tracking-wider hover:bg-[hsl(var(--color-brand-yellow)/0.85)] transition-colors"
                   >
                     {/github/i.test(link.label) ? <Github size={14} /> : <ExternalLink size={14} />}
                     {link.label}
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
           <div>
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] opacity-60 mb-3">README</h2>
             {data.readme ? (
-              <div className="border-2 border-black p-4 md:p-6 bg-stone-50 max-h-[900px] overflow-auto">
+              <div className="border-2 border-black p-4 md:p-6 bg-[hsl(var(--color-brand-cream)/0.82)] max-h-[900px] overflow-auto">
                 <MarkdownNote content={data.readme} />
               </div>
             ) : (
@@ -134,7 +134,7 @@ export default function ProjectDetail() {
         >
           {embedUrl ? (
             <div className="bg-black border-4 border-black shadow-brutal overflow-hidden">
-              <div className="bg-yellow-200 text-black border-b-2 border-black px-4 py-2 font-mono text-xs uppercase tracking-wider flex items-center gap-2">
+              <div className="bg-[hsl(var(--color-brand-yellow)/0.85)] text-black border-b-2 border-black px-4 py-2 font-mono text-xs uppercase tracking-wider flex items-center gap-2">
                 <PlayCircle size={14} />
                 Video Preview
               </div>
@@ -149,12 +149,12 @@ export default function ProjectDetail() {
               </div>
             </div>
           ) : (
-            <div className="bg-stone-200 border-4 border-black shadow-brutal p-8">
+            <div className="bg-[hsl(var(--color-brand-yellow)/0.42)] border-4 border-black shadow-brutal p-8">
               <p className="font-hand text-2xl">No video preview listed for this project.</p>
             </div>
           )}
 
-          <div className="bg-white border-4 border-black shadow-brutal p-6">
+          <div className="bg-[hsl(var(--color-brand-cream))] border-4 border-black shadow-brutal p-6">
             <h3 className="font-serif text-2xl mb-3">Quick Summary</h3>
             <p className="font-mono text-sm leading-relaxed opacity-80">{data.description}</p>
           </div>

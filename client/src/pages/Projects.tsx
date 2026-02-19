@@ -62,15 +62,15 @@ function FilterDropdown({
           flex items-center gap-2 border-2 border-black px-4 py-2.5 font-mono text-xs uppercase tracking-wider
           transition-all duration-150 cursor-pointer
           ${hasActive
-            ? "bg-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
-            : "bg-white hover:bg-stone-50 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)]"
+            ? "bg-black text-[hsl(var(--color-brand-cream))] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
+            : "bg-[hsl(var(--color-brand-cream))] hover:bg-[hsl(var(--color-brand-cream)/0.82)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)]"
           }
         `}
         data-testid={`dropdown-${label}`}
       >
         <span className="font-hand text-sm normal-case tracking-normal">{label}</span>
         {hasActive && (
-          <span className="bg-white text-black px-1.5 py-0.5 text-[10px] font-bold leading-none">
+          <span className="bg-[hsl(var(--color-brand-cream))] text-black px-1.5 py-0.5 text-[10px] font-bold leading-none">
             {activeFilter}
           </span>
         )}
@@ -84,7 +84,7 @@ function FilterDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 mt-2 z-50 min-w-[220px] bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] max-h-[320px] overflow-y-auto"
+            className="absolute top-full left-0 mt-2 z-50 min-w-[220px] bg-[hsl(var(--color-brand-cream))] border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] max-h-[320px] overflow-y-auto"
           >
             {tags.map(tag => {
               const isActive = activeFilter === tag;
@@ -99,7 +99,7 @@ function FilterDropdown({
                   className={`
                     w-full text-left px-4 py-2.5 font-mono text-xs flex items-center justify-between
                     transition-colors duration-100 border-b border-black/5 last:border-b-0
-                    ${isActive ? "bg-black text-white" : "hover:bg-stone-100"}
+                    ${isActive ? "bg-black text-[hsl(var(--color-brand-cream))]" : "hover:bg-[hsl(var(--color-brand-cream)/0.9)]"}
                   `}
                   data-testid={`button-filter-${tag}`}
                 >
@@ -150,17 +150,17 @@ export default function Projects() {
     <div>
       <h1 className="font-serif text-5xl md:text-7xl mb-8">Selected Works.</h1>
 
-      <div className="mb-10 border-2 border-black bg-white/80 shadow-brutal relative z-20 overflow-visible" data-testid="filter-bar">
+      <div className="mb-10 border-2 border-black bg-[hsl(var(--color-brand-cream)/0.8)] shadow-brutal relative z-20 overflow-visible" data-testid="filter-bar">
         <button
           onClick={() => setFilterOpen(!filterOpen)}
-          className="w-full flex items-center justify-between p-4 md:px-6 md:py-4 cursor-pointer hover:bg-stone-50 transition-colors"
+          className="w-full flex items-center justify-between p-4 md:px-6 md:py-4 cursor-pointer hover:bg-[hsl(var(--color-brand-cream)/0.82)] transition-colors"
           data-testid="button-toggle-filter"
         >
           <div className="flex items-center gap-3">
             <Filter size={18} className="opacity-60" />
             <span className="font-mono text-xs uppercase tracking-widest opacity-60">Filter by tech</span>
             {activeFilter && (
-              <span className="bg-black text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+              <span className="bg-black text-[hsl(var(--color-brand-cream))] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
                 {activeFilter}
               </span>
             )}
@@ -172,7 +172,7 @@ export default function Projects() {
                   e.stopPropagation();
                   setActiveFilter(null);
                 }}
-                className="flex items-center gap-1 font-mono text-xs bg-black text-white px-3 py-1 hover:bg-black/80 transition-colors cursor-pointer"
+                className="flex items-center gap-1 font-mono text-xs bg-black text-[hsl(var(--color-brand-cream))] px-3 py-1 hover:bg-[hsl(var(--color-brand-dark)/0.85)] transition-colors cursor-pointer"
                 data-testid="button-clear-filter"
               >
                 <X size={12} /> CLEAR
@@ -214,7 +214,7 @@ export default function Projects() {
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="min-h-[300px] bg-stone-200 border-2 border-black/10 animate-pulse" />
+            <div key={i} className="min-h-[300px] bg-[hsl(var(--color-brand-yellow)/0.42)] border-2 border-black/10 animate-pulse" />
           ))}
         </div>
       ) : filteredProjects.length === 0 ? (

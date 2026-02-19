@@ -104,7 +104,7 @@ export default function Contact() {
   return (
     <div className="max-w-5xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
-        <div className="bg-white border-4 border-black p-6 md:p-8 shadow-brutal">
+        <div className="bg-[hsl(var(--color-brand-cream))] border-4 border-black p-6 md:p-8 shadow-brutal">
           <div className="flex items-center justify-between mb-6">
             <h1 className="font-serif text-4xl md:text-5xl">COMMS_ARRAY.</h1>
             <div className="flex items-end gap-1 h-6">
@@ -118,7 +118,7 @@ export default function Contact() {
           <p className="font-mono text-xs uppercase tracking-[0.16em] opacity-60 mb-4">Primary Inbox</p>
           <button
             onClick={handleCopyEmail}
-            className="w-full flex items-center justify-between border-2 border-black px-4 py-3 font-mono text-sm hover:bg-yellow-100 transition-colors"
+            className="w-full flex items-center justify-between border-2 border-black px-4 py-3 font-mono text-sm hover:bg-[hsl(var(--color-brand-yellow)/0.38)] transition-colors"
             data-testid="button-copy-email"
           >
             <span className="break-all text-left">{primaryEmail}</span>
@@ -139,7 +139,7 @@ export default function Contact() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between border border-black px-3 py-2 hover:bg-stone-100 transition-colors"
+                    className="flex items-center justify-between border border-black px-3 py-2 hover:bg-[hsl(var(--color-brand-cream)/0.9)] transition-colors"
                   >
                     <span className="inline-flex items-center gap-2 font-mono text-sm">
                       <Icon size={14} />
@@ -159,7 +159,7 @@ export default function Contact() {
                 <a
                   key={ping.id}
                   href={`mailto:${primaryEmail}?subject=${encodeURIComponent(ping.subject)}&body=${encodeURIComponent(ping.body)}`}
-                  className="border-2 border-black px-3 py-2 font-mono text-xs text-center hover:bg-black hover:text-white transition-colors"
+                  className="border-2 border-black px-3 py-2 font-mono text-xs text-center hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors"
                 >
                   {ping.label}
                 </a>
@@ -168,7 +168,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="bg-white p-8 md:p-10 border-4 border-black shadow-brutal-lg">
+        <div className="bg-[hsl(var(--color-brand-cream))] p-8 md:p-10 border-4 border-black shadow-brutal-lg">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-serif text-3xl">Direct Message</h2>
             <Radio size={16} className="opacity-60" />
@@ -208,13 +208,13 @@ export default function Contact() {
                   <FormItem>
                     <FormLabel className="font-mono text-xs uppercase font-bold tracking-wider">Message</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Tell me what you're building..." {...field} data-testid="input-contact-message" className="border-2 border-black rounded-none min-h-[150px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-stone-50" />
+                      <Textarea placeholder="Tell me what you're building..." {...field} data-testid="input-contact-message" className="border-2 border-black rounded-none min-h-[150px] resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-[hsl(var(--color-brand-cream)/0.82)]" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={mutation.isPending} data-testid="button-contact-submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-7 text-base shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all active:shadow-none active:translate-y-0 active:translate-x-0">
+              <Button type="submit" disabled={mutation.isPending} data-testid="button-contact-submit" className="w-full rounded-none bg-black text-[hsl(var(--color-brand-cream))] hover:bg-[hsl(var(--color-brand-brown))] font-mono uppercase tracking-widest py-7 text-base shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all active:shadow-none active:translate-y-0 active:translate-x-0">
                 {mutation.isPending ? "Sending..." : "Send Message"}
                 {!mutation.isPending && <Send size={14} />}
               </Button>

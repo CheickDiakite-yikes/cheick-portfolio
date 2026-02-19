@@ -68,10 +68,10 @@ export default function Guestbook() {
           <Collapsible
             open={isOpen}
             onOpenChange={setIsOpen}
-            className="bg-white border-2 border-black shadow-brutal overflow-hidden"
+            className="bg-[hsl(var(--color-brand-cream))] border-2 border-black shadow-brutal overflow-hidden"
           >
             <CollapsibleTrigger asChild>
-              <button className="w-full p-6 flex items-center justify-between hover:bg-stone-50 transition-colors group" data-testid="button-toggle-form">
+              <button className="w-full p-6 flex items-center justify-between hover:bg-[hsl(var(--color-brand-cream)/0.82)] transition-colors group" data-testid="button-toggle-form">
                 <h2 className="font-serif text-2xl">Sign the book</h2>
                 {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
               </button>
@@ -107,7 +107,7 @@ export default function Guestbook() {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" disabled={mutation.isPending} data-testid="button-guestbook-submit" className="w-full rounded-none bg-black text-white hover:bg-stone-800 font-mono uppercase tracking-widest py-6">
+                    <Button type="submit" disabled={mutation.isPending} data-testid="button-guestbook-submit" className="w-full rounded-none bg-black text-[hsl(var(--color-brand-cream))] hover:bg-[hsl(var(--color-brand-brown))] font-mono uppercase tracking-widest py-6">
                       {mutation.isPending ? "Posting..." : "Post Note"}
                     </Button>
                   </form>
@@ -120,7 +120,7 @@ export default function Guestbook() {
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 content-start">
           {isLoading ? (
             [1, 2, 3].map(i => (
-              <div key={i} className="min-h-[160px] bg-yellow-100 border-2 border-black/10 animate-pulse" />
+              <div key={i} className="min-h-[160px] bg-[hsl(var(--color-brand-yellow)/0.38)] border-2 border-black/10 animate-pulse" />
             ))
           ) : entries.length === 0 ? (
             <div className="col-span-full text-center py-12">

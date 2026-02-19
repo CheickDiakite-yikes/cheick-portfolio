@@ -13,7 +13,7 @@ export default function About() {
         animate={{ opacity: 1, y: 0 }}
         className="flex items-center justify-between mb-8"
       >
-        <Link href="/" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-white transition-colors">
+        <Link href="/" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors">
           <ArrowLeft size={14} />
           Back
         </Link>
@@ -29,7 +29,7 @@ export default function About() {
       </motion.h1>
 
       <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 mb-10">
-        <div className="relative border-4 border-black bg-stone-200 aspect-square flex items-center justify-center overflow-hidden">
+        <div className="relative border-4 border-black bg-[hsl(var(--color-brand-yellow)/0.42)] aspect-square flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.08)_50%)] bg-[length:100%_4px]" />
           {avatarMissing ? (
             <span className="font-serif text-6xl italic">CD</span>
@@ -41,7 +41,7 @@ export default function About() {
               onError={() => setAvatarMissing(true)}
             />
           )}
-          <div className="absolute -bottom-3 -right-2 rotate-[-6deg] bg-yellow-300 border-2 border-black px-3 py-1 font-mono text-[10px] uppercase tracking-wider">
+          <div className="absolute -bottom-3 -right-2 rotate-[-6deg] bg-[hsl(var(--color-brand-yellow))] border-2 border-black px-3 py-1 font-mono text-[10px] uppercase tracking-wider">
             LVL 99 ENGINEER
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function About() {
         <div className="space-y-4">
           <h2 className="font-mono text-xs uppercase tracking-[0.2em] opacity-60">ABOUT_ME.exe</h2>
           <p className="font-mono text-base leading-relaxed">
-            AI-native Google DeepMind Hackathon Winner combining <span className="bg-yellow-200 px-1">$11B+</span> in IB/PE M&A transaction experience with hands-on AI engineering.
+            AI-native Google DeepMind Hackathon Winner combining <span className="bg-[hsl(var(--color-brand-yellow)/0.85)] px-1">$11B+</span> in IB/PE M&A transaction experience with hands-on AI engineering.
           </p>
           <p className="font-mono text-base leading-relaxed">
             Former Banker/Investor turned Techstars-backed Founder who has architected and built LLM-powered agents and workflows and evaluated 130+ private market deals.
@@ -60,8 +60,8 @@ export default function About() {
         </div>
       </div>
 
-      <div className="my-10 p-6 border-4 border-black bg-stone-100 relative">
-        <div className="absolute -top-4 left-4 bg-black text-white px-3 py-1 font-mono text-[10px] tracking-wider">
+      <div className="my-10 p-6 border-4 border-black bg-[hsl(var(--color-brand-cream)/0.9)] relative">
+        <div className="absolute -top-4 left-4 bg-black text-[hsl(var(--color-brand-cream))] px-3 py-1 font-mono text-[10px] tracking-wider">
           OBJECTIVE
         </div>
         <p className="font-hand text-2xl md:text-3xl leading-tight">
@@ -70,11 +70,11 @@ export default function About() {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 bg-sky-200 border-2 border-black font-mono text-xs uppercase tracking-wider hover:translate-y-[-2px] transition-transform">
+        <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 bg-[hsl(var(--color-brand-green)/0.78)] border-2 border-black font-mono text-xs uppercase tracking-wider hover:translate-y-[-2px] transition-transform">
           <Rocket size={14} />
           Return to Ship
         </Link>
-        <Link href="/?view=moon" className="inline-flex items-center gap-2 px-4 py-2 bg-violet-200 border-2 border-black font-mono text-xs uppercase tracking-wider hover:translate-y-[-2px] transition-transform">
+        <Link href="/?view=moon" className="inline-flex items-center gap-2 px-4 py-2 bg-[hsl(var(--color-brand-brown)/0.35)] border-2 border-black font-mono text-xs uppercase tracking-wider hover:translate-y-[-2px] transition-transform">
           <Moon size={14} />
           Return to Moon
         </Link>

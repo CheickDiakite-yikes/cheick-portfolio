@@ -17,7 +17,7 @@ function renderInlineMarkdown(text: string): ReactNode[] {
     }
     if (token.startsWith("`") && token.endsWith("`")) {
       return (
-        <code key={index} className="px-1 py-0.5 bg-stone-200 border border-black/20 text-[0.9em]">
+        <code key={index} className="px-1 py-0.5 bg-[hsl(var(--color-brand-yellow)/0.42)] border border-black/20 text-[0.9em]">
           {token.slice(1, -1)}
         </code>
       );

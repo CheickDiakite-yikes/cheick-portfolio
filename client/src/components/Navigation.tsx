@@ -5,14 +5,14 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const links = [
-  { href: "/", label: "Home", color: "bg-yellow-200" },
-  { href: "/about", label: "About", color: "bg-pink-200" },
-  { href: "/projects", label: "Projects", color: "bg-sky-200" },
-  { href: "/resume", label: "Resume", color: "bg-green-200" },
-  { href: "/blog", label: "Blog", color: "bg-amber-200" },
-  { href: "/guestbook", label: "Guestbook", color: "bg-orange-200" },
-  { href: "/contact", label: "Contact", color: "bg-rose-200" },
-  { href: "/admin", label: "Admin", color: "bg-stone-200" },
+  { href: "/", label: "Home", color: "bg-[hsl(var(--color-brand-yellow)/0.85)]" },
+  { href: "/about", label: "About", color: "bg-[hsl(var(--color-brand-orange)/0.85)]" },
+  { href: "/projects", label: "Projects", color: "bg-[hsl(var(--color-brand-green)/0.78)]" },
+  { href: "/resume", label: "Resume", color: "bg-[hsl(var(--color-brand-green)/0.72)]" },
+  { href: "/blog", label: "Blog", color: "bg-[hsl(var(--color-brand-yellow)/0.78)]" },
+  { href: "/guestbook", label: "Guestbook", color: "bg-[hsl(var(--color-brand-orange)/0.72)]" },
+  { href: "/contact", label: "Contact", color: "bg-[hsl(var(--color-brand-orange)/0.68)]" },
+  { href: "/admin", label: "Admin", color: "bg-[hsl(var(--color-brand-yellow)/0.42)]" },
 ];
 
 function isLinkActive(location: string, href: string): boolean {
@@ -24,7 +24,7 @@ export function Navigation() {
   const [location] = useLocation();
 
   return (
-    <nav className="fixed left-0 top-0 h-screen w-64 bg-stone-100 border-r-4 border-black hidden md:flex flex-col p-8 z-50">
+    <nav className="fixed left-0 top-0 h-screen w-64 bg-[hsl(var(--color-brand-cream)/0.9)] border-r-4 border-black hidden md:flex flex-col p-8 z-50">
       <div className="mb-12">
         <h1 className="font-serif text-4xl font-bold italic tracking-tighter hover:scale-105 transition-transform cursor-default origin-left leading-none">
           Cheick
@@ -94,7 +94,7 @@ export function MobileNav() {
           onClick={() => setIsOpen(!isOpen)}
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1, rotate: 90 }}
-          className="bg-black text-white w-16 h-16 flex items-center justify-center rounded-full shadow-brutal border-2 border-white"
+          className="bg-black text-[hsl(var(--color-brand-cream))] w-16 h-16 flex items-center justify-center rounded-full shadow-brutal border-2 border-white"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </motion.button>
@@ -115,7 +115,7 @@ export function MobileNav() {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute bottom-0 left-0 w-full h-[85vh] bg-stone-100 rounded-t-[40px] border-t-4 border-black overflow-hidden flex flex-col"
+              className="absolute bottom-0 left-0 w-full h-[85vh] bg-[hsl(var(--color-brand-cream)/0.9)] rounded-t-[40px] border-t-4 border-black overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="w-12 h-1 bg-black/20 mx-auto mt-6 rounded-full" />
@@ -154,7 +154,7 @@ export function MobileNav() {
         <motion.div 
           initial={{ y: 100 }}
           animate={{ y: 0 }}
-          className="md:hidden fixed bottom-0 left-0 w-full bg-stone-100/80 backdrop-blur-md border-t-2 border-black p-4 z-40 flex justify-between items-center px-6"
+          className="md:hidden fixed bottom-0 left-0 w-full bg-[hsl(var(--color-brand-cream)/0.8)] backdrop-blur-md border-t-2 border-black p-4 z-40 flex justify-between items-center px-6"
         >
           <span className="font-mono text-xs font-bold uppercase">
              {links.find((link) => isLinkActive(location, link.href))?.label || "Portfolio"}

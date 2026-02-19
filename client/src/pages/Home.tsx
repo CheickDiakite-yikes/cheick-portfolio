@@ -58,7 +58,7 @@ export default function Home() {
         <StickyNote color="blue" rotate={-1} delay={0.4} className="hidden lg:flex min-h-[200px] flex-col justify-between">
           <span className="font-mono text-xs opacity-50">CONTACT</span>
           <p className="font-mono text-lg break-all">contact@cheickdiakite.com</p>
-          <Link href="/contact" className="self-end px-3 py-1 bg-black text-white font-mono text-xs hover:bg-black/80 transition-colors">
+          <Link href="/contact" className="self-end px-3 py-1 bg-black text-[hsl(var(--color-brand-cream))] font-mono text-xs hover:bg-[hsl(var(--color-brand-dark)/0.85)] transition-colors">
                SAY HELLO
           </Link>
         </StickyNote>

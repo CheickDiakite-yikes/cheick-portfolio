@@ -22,9 +22,9 @@ export default function BlogPost() {
   if (isLoading) {
     return (
       <div className="max-w-3xl mx-auto space-y-6 animate-pulse">
-        <div className="h-8 w-32 bg-stone-300" />
-        <div className="h-16 w-3/4 bg-stone-200" />
-        <div className="h-80 w-full bg-stone-200" />
+        <div className="h-8 w-32 bg-[hsl(var(--color-brand-yellow)/0.58)]" />
+        <div className="h-16 w-3/4 bg-[hsl(var(--color-brand-yellow)/0.42)]" />
+        <div className="h-80 w-full bg-[hsl(var(--color-brand-yellow)/0.42)]" />
       </div>
     );
   }
@@ -32,7 +32,7 @@ export default function BlogPost() {
   if (!data || error) {
     return (
       <div className="max-w-3xl mx-auto">
-        <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-white transition-colors mb-8">
+        <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors mb-8">
           <ArrowLeft size={14} />
           Back to Blog
         </Link>
@@ -81,7 +81,7 @@ export default function BlogPost() {
   return (
     <div className="max-w-4xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
-        <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-white transition-colors mb-8">
+        <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider border border-black px-3 py-2 hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors mb-8">
           <ArrowLeft size={14} />
           Back to Blog
         </Link>
@@ -92,10 +92,10 @@ export default function BlogPost() {
         <h1 className="font-serif text-5xl md:text-7xl leading-[0.95] mb-4">{post.title}</h1>
         <p className="font-mono text-base leading-relaxed opacity-80">{post.excerpt}</p>
 
-        <div className="mt-6 inline-flex flex-wrap items-center gap-2 border-2 border-black bg-white p-2 shadow-brutal">
+        <div className="mt-6 inline-flex flex-wrap items-center gap-2 border-2 border-black bg-[hsl(var(--color-brand-cream))] p-2 shadow-brutal">
           <button
             onClick={sharePost}
-            className="inline-flex items-center gap-2 border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-yellow-100 transition-colors"
+            className="inline-flex items-center gap-2 border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-[hsl(var(--color-brand-yellow)/0.38)] transition-colors"
             data-testid="button-share-native"
           >
             <Share2 size={13} />
@@ -103,7 +103,7 @@ export default function BlogPost() {
           </button>
           <button
             onClick={copyLink}
-            className="inline-flex items-center gap-2 border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-stone-100 transition-colors"
+            className="inline-flex items-center gap-2 border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-[hsl(var(--color-brand-cream)/0.9)] transition-colors"
             data-testid="button-share-copy"
           >
             {copied ? <Check size={13} /> : <Copy size={13} />}
@@ -113,7 +113,7 @@ export default function BlogPost() {
             href={twitterShareUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-black hover:text-white transition-colors"
+            className="inline-flex items-center border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors"
           >
             Share on X
           </a>
@@ -121,7 +121,7 @@ export default function BlogPost() {
             href={linkedInShareUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-black hover:text-white transition-colors"
+            className="inline-flex items-center border border-black px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider hover:bg-black hover:text-[hsl(var(--color-brand-cream))] transition-colors"
           >
             Share on LinkedIn
           </a>
@@ -131,7 +131,7 @@ export default function BlogPost() {
       <motion.article
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white border-4 border-black shadow-brutal p-6 md:p-10"
+        className="bg-[hsl(var(--color-brand-cream))] border-4 border-black shadow-brutal p-6 md:p-10"
       >
         <MarkdownNote content={post.content} />
       </motion.article>

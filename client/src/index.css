@@ -19,7 +19,7 @@
   --color-brand-cream: 48 71% 91%;   /* F7E7B4 */
 
   --color-paper: var(--color-brand-cream);
-  --color-paper-dark: 38 72% 65%;
+  --color-paper-dark: 26 52% 78%;
   --color-ink: var(--color-brand-dark);
   
   --color-sticky-yellow: var(--color-brand-yellow);
@@ -40,11 +40,11 @@
   --color-primary: var(--color-ink);
   --color-primary-foreground: var(--color-paper);
   
-  --color-secondary: 40 10% 85%;
+  --color-secondary: 40 48% 84%;
   --color-secondary-foreground: var(--color-ink);
   
-  --color-muted: 40 10% 80%;
-  --color-muted-foreground: 0 0% 40%;
+  --color-muted: 36 38% 80%;
+  --color-muted-foreground: 20 28% 30%;
   
   --color-accent: var(--color-sticky-yellow);
   --color-accent-foreground: var(--color-ink);
@@ -52,16 +52,16 @@
   --color-destructive: 0 84% 60%;
   --color-destructive-foreground: 0 0% 98%;
 
-  --color-border: 0 0% 10%;
-  --color-input: 0 0% 10%;
-  --color-ring: 0 0% 10%;
+  --color-border: var(--color-brand-dark);
+  --color-input: var(--color-brand-brown);
+  --color-ring: var(--color-brand-brown);
 
   --radius-sm: 0px; /* Brutalist - no rounded corners on main elements */
   --radius-md: 0px;
   --radius-lg: 2px;
   
   /* Notebook Grid Pattern */
-  --pattern-grid: radial-gradient(circle, #000000 1px, transparent 1px);
+  --pattern-grid: radial-gradient(circle, hsl(var(--color-brand-dark) / 0.12) 1px, transparent 1px);
 }
 
 @layer base {
@@ -71,8 +71,15 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background-color: hsl(var(--color-brand-cream));
-    background-image: radial-gradient(hsl(var(--color-brand-dark) / 0.1) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-image:
+      radial-gradient(hsl(var(--color-brand-brown) / 0.12) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--color-brand-cream)) 0%, hsl(var(--color-brand-yellow) / 0.28) 100%);
+    background-size: 24px 24px, auto;
+  }
+
+  ::selection {
+    background: hsl(var(--color-brand-yellow));
+    color: hsl(var(--color-brand-dark));
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -84,42 +91,67 @@
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: hsl(40 20% 90%);
-    border-left: 2px solid black;
+    background: hsl(var(--color-brand-cream) / 0.86);
+    border-left: 2px solid hsl(var(--color-brand-dark));
   }
   ::-webkit-scrollbar-thumb {
-    background: black;
-    border: 2px solid black;
+    background: hsl(var(--color-brand-brown));
+    border: 2px solid hsl(var(--color-brand-dark));
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #333;
+    background: hsl(var(--color-brand-dark));
   }
 }
 
 @layer utilities {
   .text-stroke {
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px hsl(var(--color-brand-dark));
     color: transparent;
   }
   
   .text-stroke-sm {
-    -webkit-text-stroke: 0.5px black;
+    -webkit-text-stroke: 0.5px hsl(var(--color-brand-dark));
     color: transparent;
   }
   
   .shadow-brutal {
-    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+    box-shadow: 4px 4px 0px 0px hsl(var(--color-brand-dark));
   }
   
   .shadow-brutal-lg {
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+    box-shadow: 8px 8px 0px 0px hsl(var(--color-brand-dark));
   }
   
   .shadow-brutal-sm {
-    box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+    box-shadow: 2px 2px 0px 0px hsl(var(--color-brand-dark));
   }
 
   .paper-texture {
     filter: contrast(120%) brightness(100%);
+  }
+
+  /* Warm overrides for hard-coded utility classes still used in components. */
+  .bg-black {
+    background-color: hsl(var(--color-brand-dark)) !important;
+  }
+
+  .text-black {
+    color: hsl(var(--color-brand-dark)) !important;
+  }
+
+  .text-white {
+    color: hsl(var(--color-brand-cream)) !important;
+  }
+
+  .border-black {
+    border-color: hsl(var(--color-brand-dark)) !important;
+  }
+
+  .border-white {
+    border-color: hsl(var(--color-brand-cream)) !important;
+  }
+
+  .ring-black {
+    --tw-ring-color: hsl(var(--color-brand-dark)) !important;
   }
 }

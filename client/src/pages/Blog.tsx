@@ -16,9 +16,9 @@ export default function Blog() {
         <div className="space-y-12">
           {[1, 2, 3].map(i => (
             <div key={i} className="space-y-3 animate-pulse">
-              <div className="h-3 w-32 bg-stone-300" />
-              <div className="h-8 w-full bg-stone-200" />
-              <div className="h-4 w-3/4 bg-stone-200" />
+              <div className="h-3 w-32 bg-[hsl(var(--color-brand-yellow)/0.58)]" />
+              <div className="h-8 w-full bg-[hsl(var(--color-brand-yellow)/0.42)]" />
+              <div className="h-4 w-3/4 bg-[hsl(var(--color-brand-yellow)/0.42)]" />
             </div>
           ))}
         </div>
@@ -35,7 +35,7 @@ export default function Blog() {
                 <span className="font-mono text-xs opacity-50">
                   {format(new Date(post.createdAt), "MMM dd, yyyy")}
                 </span>
-                <span className="font-mono text-xs bg-black text-white px-2 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity">READ</span>
+                <span className="font-mono text-xs bg-black text-[hsl(var(--color-brand-cream))] px-2 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity">READ</span>
               </div>
               <h2 className="font-serif text-3xl mb-3 group-hover:italic transition-all" data-testid={`text-post-title-${post.id}`}>
                 {post.title}

@@ -63,7 +63,7 @@ export function Typewriter({
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ repeat: Infinity, duration: 0.8 }}
-        className="inline-block w-[2px] h-[1em] bg-blue-600 align-middle ml-1"
+        className="inline-block w-[2px] h-[1em] bg-[hsl(var(--color-brand-brown))] align-middle ml-1"
       />
     </div>
   );

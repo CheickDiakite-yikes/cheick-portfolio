@@ -50,7 +50,7 @@ function AdminDashboard({
         <Button
           onClick={onLogout}
           disabled={isLoggingOut}
-          className="rounded-none bg-black text-white font-mono text-xs uppercase tracking-wider"
+          className="rounded-none bg-black text-[hsl(var(--color-brand-cream))] font-mono text-xs uppercase tracking-wider"
           data-testid="button-admin-logout"
         >
           <LogOut size={14} />
@@ -65,8 +65,8 @@ function AdminDashboard({
             onClick={() => setActiveTab(tab.key)}
             className={`px-4 py-2 font-mono text-sm uppercase tracking-wider border-2 border-black transition-all whitespace-nowrap ${
               activeTab === tab.key 
-                ? "bg-black text-white shadow-brutal-sm" 
-                : "bg-white hover:bg-stone-100"
+                ? "bg-black text-[hsl(var(--color-brand-cream))] shadow-brutal-sm" 
+                : "bg-[hsl(var(--color-brand-cream))] hover:bg-[hsl(var(--color-brand-cream)/0.9)]"
             }`}
             data-testid={`button-tab-${tab.key}`}
           >
@@ -139,13 +139,13 @@ function ProjectsAdmin() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="font-serif text-2xl">Projects ({projects.length})</h2>
-        <Button onClick={() => setShowForm(!showForm)} className="rounded-none bg-black text-white font-mono text-xs" data-testid="button-add-project">
+        <Button onClick={() => setShowForm(!showForm)} className="rounded-none bg-black text-[hsl(var(--color-brand-cream))] font-mono text-xs" data-testid="button-add-project">
           {showForm ? <X size={14} /> : <Plus size={14} />} {showForm ? "Cancel" : "Add"}
         </Button>
       </div>
 
       {showForm && (
-        <div className="bg-yellow-100 border-2 border-black p-6 mb-6 shadow-brutal space-y-4">
+        <div className="bg-[hsl(var(--color-brand-yellow)/0.38)] border-2 border-black p-6 mb-6 shadow-brutal space-y-4">
           <Input value={title} onChange={e => setTitle(e.target.value)} placeholder="Project title" className="border-black rounded-none" data-testid="input-project-title" />
           <Textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="border-black rounded-none" data-testid="input-project-desc" />
           <Input value={tags} onChange={e => setTags(e.target.value)} placeholder="Tags (comma separated)" className="border-black rounded-none" data-testid="input-project-tags" />
@@ -155,14 +155,14 @@ function ProjectsAdmin() {
                 key={c}
                 onClick={() => setColor(c)}
                 className={`w-8 h-8 border-2 ${color === c ? "border-black ring-2 ring-offset-1 ring-black" : "border-black/30"} ${
-                  c === "white" ? "bg-white" : c === "yellow" ? "bg-yellow-200" : c === "pink" ? "bg-pink-200" : c === "blue" ? "bg-sky-200" : "bg-green-200"
+                  c === "white" ? "bg-[hsl(var(--color-brand-cream))]" : c === "yellow" ? "bg-[hsl(var(--color-brand-yellow)/0.85)]" : c === "pink" ? "bg-[hsl(var(--color-brand-orange)/0.85)]" : c === "blue" ? "bg-[hsl(var(--color-brand-green)/0.78)]" : "bg-[hsl(var(--color-brand-green)/0.72)]"
                 }`}
               />
             ))}
           </div>
           <Input value={liveUrl} onChange={e => setLiveUrl(e.target.value)} placeholder="Live demo URL (optional)" className="border-black rounded-none" />
           <Input value={sourceUrl} onChange={e => setSourceUrl(e.target.value)} placeholder="Source code URL (optional)" className="border-black rounded-none" />
-          <Button onClick={() => createMutation.mutate()} disabled={!title || !description || createMutation.isPending} className="rounded-none bg-black text-white font-mono w-full" data-testid="button-submit-project">
+          <Button onClick={() => createMutation.mutate()} disabled={!title || !description || createMutation.isPending} className="rounded-none bg-black text-[hsl(var(--color-brand-cream))] font-mono w-full" data-testid="button-submit-project">
             {createMutation.isPending ? "Creating..." : "Create Project"}
           </Button>
         </div>
@@ -170,7 +170,7 @@ function ProjectsAdmin() {
 
       <div className="space-y-3">
         {projects.map(project => (
-          <div key={project.id} className="bg-white border-2 border-black p-4 flex justify-between items-center" data-testid={`row-project-${project.id}`}>
+          <div key={project.id} className="bg-[hsl(var(--color-brand-cream))] border-2 border-black p-4 flex justify-between items-center" data-testid={`row-project-${project.id}`}>
             <div>
               <h3 className="font-bold font-mono">{project.title}</h3>
               <p className="text-sm opacity-60 font-mono">{project.tags.join(", ")}</p>
@@ -234,13 +234,13 @@ function BlogAdmin() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="font-serif text-2xl">Blog Posts ({posts.length})</h2>
-        <Button onClick={() => setShowForm(!showForm)} className="rounded-none bg-black text-white font-mono text-xs" data-testid="button-add-post">
+        <Button onClick={() => setShowForm(!showForm)} className="rounded-none bg-black text-[hsl(var(--color-brand-cream))] font-mono text-xs" data-testid="button-add-post">
           {showForm ? <X size={14} /> : <Plus size={14} />} {showForm ? "Cancel" : "Add"}
         </Button>
       </div>
 
       {showForm && (
-        <div className="bg-pink-100 border-2 border-black p-6 mb-6 shadow-brutal space-y-4">
+        <div className="bg-[hsl(var(--color-brand-orange)/0.38)] border-2 border-black p-6 mb-6 shadow-brutal space-y-4">
           <Input value={title} onChange={e => setTitle(e.target.value)} placeholder="Post title" className="border-black rounded-none" data-testid="input-post-title" />
           <Textarea value={excerpt} onChange={e => setExcerpt(e.target.value)} placeholder="Short excerpt" className="border-black rounded-none" data-testid="input-post-excerpt" />
           <Textarea value={content} onChange={e => setContent(e.target.value)} placeholder="Full content..." className="border-black rounded-none min-h-[150px]" data-testid="input-post-content" />
@@ -248,7 +248,7 @@ function BlogAdmin() {
             <input type="checkbox" checked={published} onChange={e => setPublished(e.target.checked)} className="w-4 h-4" />
             Publish immediately
           </label>
-          <Button onClick={() => createMutation.mutate()} disabled={!title || !excerpt || createMutation.isPending} className="rounded-none bg-black text-white font-mono w-full" data-testid="button-submit-post">
+          <Button onClick={() => createMutation.mutate()} disabled={!title || !excerpt || createMutation.isPending} className="rounded-none bg-black text-[hsl(var(--color-brand-cream))] font-mono w-full" data-testid="button-submit-post">
             {createMutation.isPending ? "Creating..." : "Create Post"}
           </Button>
         </div>
@@ -256,7 +256,7 @@ function BlogAdmin() {
 
       <div className="space-y-3">
         {posts.map(post => (
-          <div key={post.id} className="bg-white border-2 border-black p-4 flex justify-between items-center" data-testid={`row-post-${post.id}`}>
+          <div key={post.id} className="bg-[hsl(var(--color-brand-cream))] border-2 border-black p-4 flex justify-between items-center" data-testid={`row-post-${post.id}`}>
             <div>
               <h3 className="font-bold font-mono">{post.title}</h3>
               <p className="text-sm opacity-60 font-mono">{post.published ? "Published" : "Draft"}</p>
@@ -331,7 +331,7 @@ function GuestbookAdmin() {
       ) : (
         <div className="space-y-3">
           {sortedEntries.map(entry => (
-            <div key={entry.id} className="bg-white border-2 border-black p-4 flex justify-between items-start" data-testid={`row-guestbook-${entry.id}`}>
+            <div key={entry.id} className="bg-[hsl(var(--color-brand-cream))] border-2 border-black p-4 flex justify-between items-start" data-testid={`row-guestbook-${entry.id}`}>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] mb-2 opacity-60">
                   Status:{" "}
@@ -341,7 +341,7 @@ function GuestbookAdmin() {
                         ? "text-green-700"
                         : entry.status === "rejected"
                           ? "text-red-700"
-                          : "text-amber-700"
+                          : "text-[hsl(var(--color-brand-brown))]"
                     }
                   >
                     {entry.status}
@@ -423,7 +423,7 @@ function MessagesAdmin() {
       <h2 className="font-serif text-2xl mb-6">
         Messages ({messages.length})
         {unreadCount > 0 && (
-          <span className="ml-2 bg-red-500 text-white text-xs font-mono px-2 py-0.5 align-middle">{unreadCount} new</span>
+          <span className="ml-2 bg-red-500 text-[hsl(var(--color-brand-cream))] text-xs font-mono px-2 py-0.5 align-middle">{unreadCount} new</span>
         )}
       </h2>
       {messages.length === 0 ? (
@@ -431,12 +431,12 @@ function MessagesAdmin() {
       ) : (
         <div className="space-y-3">
           {messages.map(msg => (
-            <div key={msg.id} className={`border-2 border-black p-4 ${msg.read ? "bg-stone-50" : "bg-yellow-50 border-l-4 border-l-yellow-500"}`} data-testid={`row-message-${msg.id}`}>
+            <div key={msg.id} className={`border-2 border-black p-4 ${msg.read ? "bg-[hsl(var(--color-brand-cream)/0.82)]" : "bg-[hsl(var(--color-brand-yellow)/0.28)] border-l-4 border-l-[hsl(var(--color-brand-orange))]"}`} data-testid={`row-message-${msg.id}`}>
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="font-bold font-mono">{msg.subject}</h3>
-                    {!msg.read && <span className="bg-yellow-400 text-[10px] font-bold px-1.5 font-mono">NEW</span>}
+                    {!msg.read && <span className="bg-[hsl(var(--color-brand-orange))] text-[10px] font-bold px-1.5 font-mono">NEW</span>}
                   </div>
                   <p className="font-mono text-xs opacity-50">{msg.email}</p>
                   <p className="font-mono text-sm mt-2">{msg.message}</p>
@@ -523,7 +523,7 @@ export default function Admin() {
   if (isSessionLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-full max-w-md bg-stone-200 border-2 border-black p-8 shadow-brutal text-center">
+        <div className="w-full max-w-md bg-[hsl(var(--color-brand-yellow)/0.42)] border-2 border-black p-8 shadow-brutal text-center">
           <p className="font-mono text-sm uppercase tracking-wider opacity-70">Checking session...</p>
         </div>
       </div>
@@ -536,9 +536,9 @@ export default function Admin() {
 
   return (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="w-full max-w-md bg-stone-200 border-2 border-black p-8 shadow-brutal">
+      <div className="w-full max-w-md bg-[hsl(var(--color-brand-yellow)/0.42)] border-2 border-black p-8 shadow-brutal">
         <div className="flex justify-center mb-6">
-          <div className="bg-black text-white p-4 rounded-full">
+          <div className="bg-black text-[hsl(var(--color-brand-cream))] p-4 rounded-full">
             <Lock size={32} />
           </div>
         </div>
@@ -552,14 +552,14 @@ export default function Admin() {
               type="password" 
               value={password} 
               onChange={e => setPassword(e.target.value)} 
-              className="bg-white border-2 border-black rounded-none focus-visible:ring-0 focus-visible:border-black shadow-brutal-sm" 
+              className="bg-[hsl(var(--color-brand-cream))] border-2 border-black rounded-none focus-visible:ring-0 focus-visible:border-black shadow-brutal-sm" 
               data-testid="input-admin-password"
             />
           </div>
           <Button
             type="submit"
             disabled={loginMutation.isPending}
-            className="w-full bg-black text-white rounded-none font-mono hover:bg-stone-800"
+            className="w-full bg-black text-[hsl(var(--color-brand-cream))] rounded-none font-mono hover:bg-[hsl(var(--color-brand-brown))]"
             data-testid="button-admin-login"
           >
             {loginMutation.isPending ? "VERIFYING..." : "LOGIN"}

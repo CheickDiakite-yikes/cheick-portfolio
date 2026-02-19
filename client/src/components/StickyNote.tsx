@@ -15,11 +15,11 @@ interface StickyNoteProps {
 }
 
 const colors = {
-  yellow: "bg-yellow-200",
-  pink: "bg-pink-200",
-  blue: "bg-sky-200",
-  green: "bg-green-200",
-  white: "bg-white",
+  yellow: "bg-[hsl(var(--color-brand-yellow)/0.85)]",
+  pink: "bg-[hsl(var(--color-brand-orange)/0.85)]",
+  blue: "bg-[hsl(var(--color-brand-green)/0.78)]",
+  green: "bg-[hsl(var(--color-brand-green)/0.72)]",
+  white: "bg-[hsl(var(--color-brand-cream))]",
 };
 
 export function StickyNote({ 
