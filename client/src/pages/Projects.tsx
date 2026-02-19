@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { StickyNote } from "@/components/StickyNote";
-import { ExternalLink, Github, FileText, Filter, X } from "lucide-react";
+import { ExternalLink, Github, FileText, Filter, X, ChevronDown } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Project } from "@shared/schema";
 import { useLocation } from "wouter";
@@ -28,11 +28,93 @@ const TAG_CATEGORIES: Record<string, string[]> = {
   ],
 };
 
-function getTagCategory(tag: string): string | null {
-  for (const [category, tags] of Object.entries(TAG_CATEGORIES)) {
-    if (tags.includes(tag)) return category;
-  }
-  return null;
+function FilterDropdown({
+  label,
+  tags,
+  activeFilter,
+  onSelect,
+  projects,
+}: {
+  label: string;
+  tags: string[];
+  activeFilter: string | null;
+  onSelect: (tag: string | null) => void;
+  projects: Project[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const hasActive = activeFilter && tags.includes(activeFilter);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className={`
+          flex items-center gap-2 border-2 border-black px-4 py-2.5 font-mono text-xs uppercase tracking-wider
+          transition-all duration-150 cursor-pointer
+          ${hasActive
+            ? "bg-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
+            : "bg-white hover:bg-stone-50 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)]"
+          }
+        `}
+        data-testid={`dropdown-${label}`}
+      >
+        <span className="font-hand text-sm normal-case tracking-normal">{label}</span>
+        {hasActive && (
+          <span className="bg-white text-black px-1.5 py-0.5 text-[10px] font-bold leading-none">
+            {activeFilter}
+          </span>
+        )}
+        <ChevronDown size={14} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -4, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 mt-2 z-50 min-w-[220px] bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] max-h-[320px] overflow-y-auto"
+          >
+            {tags.map(tag => {
+              const isActive = activeFilter === tag;
+              const count = projects.filter(p => p.tags.includes(tag)).length;
+              return (
+                <button
+                  key={tag}
+                  onClick={() => {
+                    onSelect(isActive ? null : tag);
+                    setOpen(false);
+                  }}
+                  className={`
+                    w-full text-left px-4 py-2.5 font-mono text-xs flex items-center justify-between
+                    transition-colors duration-100 border-b border-black/5 last:border-b-0
+                    ${isActive ? "bg-black text-white" : "hover:bg-stone-100"}
+                  `}
+                  data-testid={`button-filter-${tag}`}
+                >
+                  <span className="uppercase tracking-wider">{tag}</span>
+                  <span className={`text-[10px] font-bold ${isActive ? "opacity-60" : "opacity-40"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default function Projects() {
@@ -89,34 +171,16 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">
           {Object.entries(categoryTags).map(([category, tags]) => (
-            <div key={category} className="flex flex-wrap items-center gap-2">
-              <span className="font-hand text-sm opacity-50 w-20 shrink-0">{category}</span>
-              <div className="flex flex-wrap gap-1.5">
-                {tags.map(tag => {
-                  const isActive = activeFilter === tag;
-                  const count = projects.filter(p => p.tags.includes(tag)).length;
-                  return (
-                    <button
-                      key={tag}
-                      onClick={() => setActiveFilter(isActive ? null : tag)}
-                      className={`
-                        border-2 border-black px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider
-                        transition-all duration-150 cursor-pointer
-                        ${isActive
-                          ? "bg-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]"
-                          : "bg-white hover:bg-stone-100 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)]"
-                        }
-                      `}
-                      data-testid={`button-filter-${tag}`}
-                    >
-                      {tag} <span className="opacity-50">({count})</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <FilterDropdown
+              key={category}
+              label={category}
+              tags={tags}
+              activeFilter={activeFilter}
+              onSelect={setActiveFilter}
+              projects={projects}
+            />
           ))}
         </div>
       </div>
