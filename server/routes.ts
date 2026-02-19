@@ -82,13 +82,13 @@ function buildBlogOgSvg(title: string, excerpt: string): string {
   const titleTspans = titleLines
     .map(
       (line, index) =>
-        `<tspan x="96" dy="${index === 0 ? 0 : 70}" font-size="58">${escapeXml(line)}</tspan>`,
+        `<tspan x="96" dy="${index === 0 ? 0 : 74}" font-size="62">${escapeXml(line)}</tspan>`,
     )
     .join("");
   const excerptTspans = excerptLines
     .map(
       (line, index) =>
-        `<tspan x="96" dy="${index === 0 ? 0 : 40}" font-size="30">${escapeXml(line)}</tspan>`,
+        `<tspan x="96" dy="${index === 0 ? 0 : 38}" font-size="28">${escapeXml(line)}</tspan>`,
     )
     .join("");
 
@@ -96,18 +96,18 @@ function buildBlogOgSvg(title: string, excerpt: string): string {
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${escapeXml(
     title,
   )}">
-  <rect width="1200" height="630" fill="#FCFBF7"/>
-  <rect x="32" y="32" width="1136" height="566" rx="0" stroke="#111111" stroke-width="4" fill="none"/>
-  <rect x="96" y="88" width="240" height="40" fill="#FDE68A" stroke="#111111" stroke-width="2"/>
-  <text x="114" y="116" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="2.8">BLOG POST</text>
-  <text x="96" y="220" font-family="'Playfair Display', Georgia, serif" font-weight="700" fill="#111111">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect x="24" y="24" width="1152" height="582" rx="0" stroke="#111111" stroke-width="4" fill="none"/>
+  <text x="96" y="110" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="2.4">CHEICK DIAKITE / BLOG</text>
+  <line x1="96" y1="132" x2="1104" y2="132" stroke="#111111" stroke-width="2"/>
+  <text x="96" y="230" font-family="'Playfair Display', Georgia, serif" font-weight="700" fill="#111111">
     ${titleTspans}
   </text>
-  <text x="96" y="510" font-family="'JetBrains Mono', 'Courier New', monospace" fill="#444444" letter-spacing="0.2">
+  <text x="96" y="500" font-family="'JetBrains Mono', 'Courier New', monospace" fill="#444444" letter-spacing="0.2">
     ${excerptTspans}
   </text>
-  <line x1="96" y1="548" x2="1104" y2="548" stroke="#111111" stroke-width="2" stroke-dasharray="2 10"/>
-  <text x="96" y="582" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="1.8">CHEICK DIAKITE</text>
+  <line x1="96" y1="540" x2="1104" y2="540" stroke="#111111" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="96" y="580" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" fill="#111111" letter-spacing="1.8">NOTES LIKE A GO-GETTER</text>
 </svg>`;
 }
 
