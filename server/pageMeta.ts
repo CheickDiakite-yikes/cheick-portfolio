@@ -150,7 +150,7 @@ export async function applyRequestMeta(req: Request, html: string): Promise<stri
   result = upsertHeadTag(
     result,
     /<meta\s+property="og:image:height"\s+content="[^"]*"\s*\/?>/i,
-    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:height" content="675" />`,
   );
   result = upsertHeadTag(
     result,
