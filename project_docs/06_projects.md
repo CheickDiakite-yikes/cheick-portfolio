@@ -113,7 +113,73 @@ An authenticated multi-user workspace for founders and operators to transform ro
 
 ---
 
-## 4. Simili (AI Life Simulator)
+## 4. LessonCraft
+**Overview:** AI-powered K-12 lesson planning platform for teachers—generates differentiated, standards-aligned lesson plans from single periods to full semesters with worksheets, presentation slides, vocabulary lists, and visual lesson calendars using Gemini AI and Imagen 3.0.
+
+**Links:**
+- [Live Site](https://Lessies.replit.app)
+- [GitHub](https://github.com/CheickDiakite-yikes/AI-Lessons-k12)
+
+**Tech Stack:** Gemini 2.5 Flash, Imagen 3.0, Next.js 15, TypeScript, PostgreSQL, Drizzle ORM, NextAuth.js, Tailwind CSS
+
+### Readme
+# LessonCraft
+## AI-Powered K-12 Lesson Planning
+
+A production-grade lesson planning web application for teachers, powered by Google Gemini AI. Generates differentiated, standards-aligned lesson plans ranging from a single class period to a full semester — complete with worksheets, presentation slides, vocabulary lists, and assessment strategies. Built for Massachusetts DESE standards with a K-6 elementary focus.
+
+### AI-POWERED LESSON GENERATION
+- 7 Plan Lengths: Single Lesson, One Week, Two Weeks, Three Weeks, Four Weeks, One Quarter, One Semester
+- 4 Subjects: ELA, Math, Science, Social Studies (1st through 6th Grade)
+- Massachusetts DESE Standards: Auto-aligned with official MA standard codes
+- Bloom's Taxonomy Progression: Multi-day plans follow a scaffolded arc from Remember/Understand through Evaluate/Create
+- Tiered Pedagogical Framework with short, medium, and long plan structures
+- Vocabulary Threading, Connection to Prior Learning, and Spiral Review every 5th day
+
+### CLASS ROSTER MANAGEMENT
+- Unlimited Rosters with per-student learning profiles
+- WIDA English Proficiency Levels (Entering through Bridging)
+- Reading, Math, Writing, and Academic Level tracking
+- Learning Preference support (Visual, Auditory, Kinesthetic, Reading/Writing, 1v1, Direction-oriented)
+- Roster-Informed Differentiation: AI personalizes activities by student name and profile
+
+### WORKSHEET SYSTEM
+- 6 Specialized Types: Matching, Fill in the Blank, Multiple Choice, Short Answer, True or False, Sorting/Categorizing
+- Multi-Select: Choose up to 4 types per plan
+- Dual Output: Student Copy + full Answer Key for every worksheet
+- Automated QA pipeline detects image placeholders and rewrites to text-only at lower temperature
+
+### PRESENTATION SLIDES
+- AI-Generated Content with structured slide outlines
+- AI-Generated Images using Imagen 3.0 (16:9 aspect ratio, 1K resolution)
+- Per-Slide Retry Logic and persistent Object Storage
+
+### VISUAL LESSON CALENDAR
+- School-Week Grid (Monday-Friday only) with Month & Week Views
+- Subject Color-Coding, Multi-Day Spanning, Click-to-Load, Start Date Picker
+- Today Highlighting in Eastern Time
+
+### PDF EXPORT
+- Full Lesson and Worksheet Export as formatted PDFs
+- Print-Ready: Letter-format, portrait orientation, JPEG rendering at 2x scale
+
+### AUTHENTICATION & SECURITY
+- Dual Login: Google OAuth + Email/Password with bcrypt 12-round hashing
+- Automatic Account Linking, JWT Session Management
+- Per-User Data Isolation, Image Ownership Verification
+- Rate Limiting: 20 AI requests per minute per user
+- Full HTTP Security Headers (HSTS, CSP, X-Frame-Options, etc.)
+
+### ARCHITECTURE
+- Next.js 15+ App Router with standalone output
+- Model Fallback Chain: gemini-3.0-flash → gemini-3-flash-preview → gemini-2.5-flash
+- Markdown Normalization post-processing for clean rendering
+- 4 PostgreSQL tables: users, class_rosters, students, lesson_plans
+- Replit Object Storage for all generated images with ownership verification
+
+---
+
+## 5. Simili (AI Life Simulator)
 **Overview:** Hyper-realistic AI life simulation game where players experience thousands of possible life paths shaped by environment, luck, and choice.
 
 **Links:**
@@ -142,7 +208,7 @@ A narrative + systems simulation game that generates believable, emotionally gro
 
 ---
 
-## 5. Kumayiri
+## 6. Kumayiri
 **Overview:** AI-powered comic creation platform with character consistency, Story Bible system, and Veo3 video animations. Winner among 831 global submissions at Google DeepMind Hackathon.
 
 **Links:**
@@ -190,7 +256,7 @@ Create stunning comic books with AI-powered visual generation, intelligent chara
 
 ---
 
-## 6. DiDi
+## 7. DiDi
 **Overview:** The world's first open-source autonomous PE firm—AI agents for deal sourcing, deep diligence, LBO modeling, and IC memos. Cuts first-draft time by 70-90%.
 
 **Links:**
@@ -245,7 +311,7 @@ Start by typing: *"Find me 3 profitable healthcare services companies in Texas."
 
 ---
 
-## 7. EchoLingo
+## 8. EchoLingo
 **Overview:** AI-powered language learning platform for ELL students—empowers teachers with AI assignment generation, smart grading, and personalized parrot-guided feedback.
 
 **Links:**
@@ -283,7 +349,7 @@ A comprehensive educational platform designed specifically for English Language 
 
 ---
 
-## 8. Mosaic
+## 9. Mosaic
 **Overview:** AI-powered photo editor built with React 19 and Gemini 2.5—features precise localized retouching, creative style filters, image mixing, smart cropping, and background removal using natural language.
 
 **Links:**
@@ -326,7 +392,7 @@ Retouch, apply creative filters, mix images, and make professional adjustments u
 
 ---
 
-## 9. AuroraTravel
+## 10. AuroraTravel
 **Overview:** Intelligent travel orchestration platform that transforms dreams into actonable, time-sequenced itineraries. Features interactive Google Maps, Travel Buddy profiles, and 3D globe visualization.
 
 **Links:**
@@ -371,7 +437,7 @@ Transforms open-ended travel dreams into actionable, visually immersive itinerar
 
 ---
 
-## 10. TeaClass
+## 11. TeaClass
 **Overview:** Intelligent lesson planning platform for K-12 ELL educators—generates standards-aligned unit plans, differentiated worksheets, presentations, and visual vocabulary with Gemini 2.5.
 
 **Links:**
@@ -415,7 +481,7 @@ An intelligent platform designed specifically for English Language Learner (ELL)
 
 ---
 
-## 11. LucentHire
+## 12. LucentHire
 **Overview:** AI-powered resume analysis platform using GPT-4o and LlamaParse—bulk upload 50+ resumes, intelligent job matching, candidate ranking, and detailed scoring insights.
 
 **Links:**
@@ -461,7 +527,7 @@ An intelligent hiring platform that leverages AI to automatically analyze resume
 
 ---
 
-## 12. Narra
+## 13. Narra
 **Overview:** Multimodal AI storytelling platform—weaves custom illustrated books with consistent characters, artwork, and audio narration using Gemini 3 Pro.
 
 **Links:**
@@ -500,7 +566,7 @@ A multimodal storytelling platform that weaves custom illustrated books page-by-
 
 ---
 
-## 13. Predi AI
+## 14. Predi AI
 **Overview:** AI-native marketing OS—autonomous CMO using Gemini 3 Pro and Veo 3.1 to generate on-brand strategy, copy, high-fidelity images, and cinematic video.
 
 **Links:**
@@ -545,7 +611,7 @@ An autonomous CMO that fuses Liquid Glassmorphic Neo-Brutalism aesthetics with G
 
 ---
 
-## 14. Apex Capital AI
+## 15. Apex Capital AI
 **Overview:** Sovereign Intelligence Terminal—AI-native Bloomberg alternative. Autonomous financial OS for reconstructing institutional-grade models, detecting forensic anomalies, and formulating investment theses.
 
 **Links:**
@@ -592,7 +658,7 @@ Operates via a coordinated swarm of specialized sub-agents:
 
 ---
 
-## 15. ADIOS
+## 16. ADIOS
 **Overview:** Agentic Director's Intelligent Output Studio—automates the entire video commercial pipeline with AI Director scripts, visual continuity engines, and Veo 3.1 video generation.
 
 **Links:**
@@ -632,7 +698,7 @@ A world-class platform that automates the professional commercial pipeline—act
 
 ---
 
-## 16. Shorty
+## 17. Shorty
 **Overview:** AI-powered short video studio—transforms simple topics into polished HD videos with script, visuals, subtitles, and music. Built for creators.
 
 **Tech Stack:** GPT-4o-mini, Azure TTS, Flask, React, PostgreSQL, MoviePy, Pexels API
@@ -664,7 +730,7 @@ Automated platform that transforms keywords into complete short-form videos with
 
 ---
 
-## 17. PokePals
+## 18. PokePals
 **Overview:** Identify your friends as collectible monster trading cards! AI analyzes photos to generate unique stats, types, moves, and rarities based on the environment.
 
 **Links:**
