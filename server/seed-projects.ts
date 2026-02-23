@@ -41,6 +41,15 @@ const REQUIRED_PROJECTS = [
     createdAt: "2026-02-19 03:38:34.323",
   },
   {
+    title: "LessonCraft",
+    description: "AI-powered K-12 lesson planning platform for teachers—generates differentiated, standards-aligned lesson plans from single periods to full semesters with worksheets, presentation slides, vocabulary lists, and visual lesson calendars using Gemini AI and Imagen 3.0.",
+    tags: ["Gemini 2.5 Flash", "Imagen 3.0", "Next.js 15", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth.js", "Tailwind CSS"],
+    color: "yellow",
+    liveUrl: "https://Lessies.replit.app",
+    sourceUrl: "https://github.com/CheickDiakite-yikes/AI-Lessons-k12",
+    createdAt: "2026-02-19 03:37:54.323",
+  },
+  {
     title: "Simili (AI Life Simulator)",
     description: "Hyper-realistic AI life simulation game where players experience thousands of possible life paths shaped by environment, luck, and choice.",
     tags: ["Gemini API", "React 19", "TypeScript", "Vite", "Express 5", "PostgreSQL", "Drizzle ORM", "Replit Object Storage"],
