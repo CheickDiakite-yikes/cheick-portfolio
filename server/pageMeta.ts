@@ -37,6 +37,16 @@ function upsertHeadTag(html: string, pattern: RegExp, replacement: string): stri
 }
 
 function resolveBaseUrl(req: Request): string {
+  const host = req.get("host");
+  if (host) {
+    const forwardedProto = req.headers["x-forwarded-proto"];
+    const protocol =
+      typeof forwardedProto === "string"
+        ? forwardedProto.split(",")[0].trim()
+        : "https";
+    return `${protocol}://${host}`;
+  }
+
   if (process.env.REPLIT_INTERNAL_APP_DOMAIN) {
     return `https://${process.env.REPLIT_INTERNAL_APP_DOMAIN}`;
   }
@@ -44,13 +54,7 @@ function resolveBaseUrl(req: Request): string {
     return `https://${process.env.REPLIT_DEV_DOMAIN}`;
   }
 
-  const forwardedProto = req.headers["x-forwarded-proto"];
-  const protocol =
-    typeof forwardedProto === "string"
-      ? forwardedProto.split(",")[0].trim()
-      : req.protocol || "http";
-  const host = req.get("host");
-  return `${protocol}://${host}`;
+  return `https://${req.hostname}`;
 }
 
 async function getPageMeta(req: Request): Promise<PageMeta> {
