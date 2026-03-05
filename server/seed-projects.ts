@@ -27,7 +27,7 @@ const REQUIRED_PROJECTS = [
     description: "Multimodal AI companion application with unified text + live voice memory, image-aware chat, personalization, and themeable mobile-first UI.",
     tags: ["Gemini 3 Flash", "Gemini 2.5 Flash Native Audio", "React 19", "TypeScript", "Vite", "Express.js", "PostgreSQL", "Drizzle ORM"],
     color: "pink",
-    liveUrl: "https://zeeme.replit.app",
+    liveUrl: "https://zeeme.io",
     sourceUrl: "https://github.com/CheickDiakite-yikes/my-ai-companion",
     createdAt: "2026-02-19 03:39:34.323",
   },

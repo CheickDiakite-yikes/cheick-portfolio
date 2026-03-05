@@ -58,7 +58,7 @@ An all-in-one sanctuary for emotional growth and self-discovery, combining cutti
 **Overview:** Multimodal AI companion application with unified text + live voice memory, image-aware chat, personalization, and themeable mobile-first UI.
 
 **Links:**
-- [Live Site](https://zeeme.replit.app)
+- [Live Site](https://zeeme.io)
 - [GitHub](https://github.com/CheickDiakite-yikes/my-ai-companion)
 
 **Tech Stack:** Gemini 3 Flash, Gemini 2.5 Flash Native Audio, React 19, TypeScript, Vite, Express.js, PostgreSQL, Drizzle ORM, Replit Object Storage
