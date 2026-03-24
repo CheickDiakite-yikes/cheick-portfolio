@@ -166,6 +166,15 @@ const REQUIRED_PROJECTS = [
     sourceUrl: "https://github.com/CheickDiakite-yikes/pokepals-ai",
     createdAt: "2026-02-19 03:24:34.323",
   },
+  {
+    title: "Marison Energy Systems",
+    description: "International business development platform specializing in US-Africa trade and investment in the energy sector. Provides context-sensitive and cost-effective solutions for powering Africa with North American expertise and technology.",
+    tags: ["React", "TypeScript", "Business Development", "Energy Sector"],
+    color: "orange",
+    liveUrl: "https://marisonenergy.com",
+    sourceUrl: null as string | null,
+    createdAt: "2026-03-24 00:00:00.000",
+  },
 ];
 
 export async function seedProjects() {

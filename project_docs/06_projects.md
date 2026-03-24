@@ -768,3 +768,47 @@ A retro-styled web app that transforms photos of your friends into unique collec
 - **Backend:** Express.js, Node.js, Drizzle ORM
 - **AI:** Google Gemini API (Vision + Text)
 - **Database:** PostgreSQL (Neon Serverless)
+
+---
+
+## 19. Marison Energy Systems
+**Overview:** International business development platform specializing in US-Africa trade and investment in the energy sector. Provides context-sensitive and cost-effective solutions for powering Africa with North American expertise and technology.
+
+**Links:**
+- [Live Site](https://marisonenergy.com)
+
+**Tech Stack:** React, TypeScript, Business Development Platform, Energy Infrastructure
+
+### Readme
+# Marison Energy Systems
+## Electric Energy Solutions for North America and Africa
+
+A professional business development platform dedicated to bridging North American technology and expertise with African energy infrastructure needs. Over 28 years of proven track record in connecting Fortune 100 companies with African energy solutions.
+
+### CORE SERVICES
+
+**🔌 Thermal Power Plant Solutions**
+- Power plant design and engineering software
+- Utility staff tools for performance optimization
+- Equipment supplier collaboration
+
+**⚡ Fast-Track Power Generation**
+- Packaged power modules for emergency deployment
+- Rapid setup and commissioning
+- Reliable and efficient solutions
+
+**🎓 Staff Training & Optimization**
+- Plant optimization training services
+- Performance maintenance capabilities
+- Cost-effective operations management
+
+**🌍 Market Expertise**
+- 28+ years bridging US-Africa energy sectors
+- Strategic planning and regulatory analysis
+- Post-acquisition integration services
+
+### KEY ACHIEVEMENTS
+- Trusted partnerships with IBM, PW Power Systems, Bell Atlantic, Shaw, and others
+- Relationships across African energy authorities (ZESA, Sonelgaz, Volta River Authority)
+- Global Ambassador, Edison Electric Institute
+- Recognition from US Trade and Development Agency
