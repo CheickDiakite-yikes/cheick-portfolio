@@ -173,7 +173,7 @@ const REQUIRED_PROJECTS = [
     color: "orange",
     liveUrl: "https://marisonenergy.com",
     sourceUrl: null as string | null,
-    createdAt: "2026-03-24 00:00:00.000",
+    createdAt: "2026-02-19 03:20:00.000",
   },
 ];
 
