@@ -175,6 +175,15 @@ const REQUIRED_PROJECTS = [
     sourceUrl: null as string | null,
     createdAt: "2026-02-19 03:20:00.000",
   },
+  {
+    title: "Sun-Powered Water Works",
+    description: "Renewable energy and sustainable water infrastructure platform showcasing solar-powered solutions for global water access and management.",
+    tags: ["React", "TypeScript", "Renewable Energy", "Water Infrastructure", "Sustainability"],
+    color: "green",
+    liveUrl: "https://sunpoweredwaterworks.org",
+    sourceUrl: null as string | null,
+    createdAt: "2026-02-19 03:15:00.000",
+  },
 ];
 
 export async function seedProjects() {
