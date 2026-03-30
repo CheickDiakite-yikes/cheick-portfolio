@@ -815,7 +815,59 @@ A professional business development platform dedicated to bridging North America
 
 ---
 
-## 20. Sun-Powered Water Works
+## 20. TIGGY
+**Overview:** AI-powered tech due diligence platform built for the Bain TIG Group—autonomously ingests data rooms to identify technical debt, evaluate engineering velocity, and output investment-committee-ready memos 10x faster.
+
+**Links:**
+- [Live Site](https://bain-tech-dd-ai-52558666644.us-west1.run.app)
+- [GitHub](https://github.com/CheickDiakite-yikes/bain-tig-analyst-case-study)
+- [Video Demo](https://www.youtube.com/embed/0LaKNRZFqWk)
+
+**Tech Stack:** Gemini 2.5 Flash, React 19, TypeScript, Firebase, Firestore, Google Cloud Run, Multi-Agent AI
+
+### Readme
+# TIGGY
+## The New Age of Tech-Driven Consulting
+
+TIGGY is the ultimate weapon for Technology & Innovation Groups. Built for the Bain TIG Group, it distills decades of tech due diligence expertise into an autonomous AI agent that stops wasting days manually parsing architecture diagrams and AWS bills.
+
+### THE TIGGY ADVANTAGE
+- **10x Faster Diligence** — Complete tech DD in hours, not weeks
+- **Automated Risk Scoring** — AI flags technical debt, security gaps, and scalability bottlenecks
+- **Architecture Validation** — Evaluate engineering velocity and codebase quality at speed
+- **SOC 2 & ISO 27001 Sandbox** — Enterprise-grade security from day one
+
+### HOW IT WORKS
+
+**1. Secure Ingestion**
+Upload confidential data room files into an isolated, SOC 2 & ISO 27001 compliant environment. Data never trains public models.
+
+**2. AI Synthesis**
+Proprietary models instantly analyze financials, tech stacks, and market positioning to identify moats and red flags.
+
+**3. Actionable Memos**
+Generate investment-committee-ready memos with charts and citations, exportable to PDF and Word instantly.
+
+### DEAL ARCHETYPES
+- **Carve-outs** — Analyzes entanglement, shared services, and standalone costs
+- **Growth Equity** — Audits scalability, architecture bottlenecks, and engineering velocity
+- **LBOs** — Identifies technical debt, cost-reduction opportunities, and post-close integration risks
+
+### THE VAULT (Security)
+- SOC 2 & ISO 27001 certified infrastructure
+- Zero-data-retention: models never trained on client data
+- Isolated tenant environments — no cross-contamination
+
+### TECH STACK
+- **Frontend:** React 19, TypeScript, Tailwind CSS
+- **AI:** Google Gemini 2.5 Flash (multi-agent orchestration)
+- **Backend:** Firebase, Firestore, Google Cloud Run
+- **Auth:** Firebase Authentication with multi-tenancy
+- **Export:** PDF and Word document generation
+
+---
+
+## 21. Sun-Powered Water Works
 **Overview:** Renewable energy and sustainable water infrastructure platform showcasing solar-powered solutions for global water access and management.
 
 **Links:**

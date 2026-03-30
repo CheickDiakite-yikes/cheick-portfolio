@@ -41,6 +41,15 @@ const REQUIRED_PROJECTS = [
     createdAt: "2026-02-19 03:38:34.323",
   },
   {
+    title: "TIGGY",
+    description: "AI-powered tech due diligence platform built for the Bain TIG Group—autonomously ingests data rooms to identify technical debt, evaluate engineering velocity, and output investment-committee-ready memos 10x faster.",
+    tags: ["Gemini 2.5 Flash", "React 19", "TypeScript", "Firebase", "Firestore", "Google Cloud Run", "Multi-Agent AI"],
+    color: "blue",
+    liveUrl: "https://bain-tech-dd-ai-52558666644.us-west1.run.app",
+    sourceUrl: "https://github.com/CheickDiakite-yikes/bain-tig-analyst-case-study",
+    createdAt: "2026-02-19 03:38:00.000",
+  },
+  {
     title: "LessonCraft",
     description: "AI-powered K-12 lesson planning platform for teachers—generates differentiated, standards-aligned lesson plans from single periods to full semesters with worksheets, presentation slides, vocabulary lists, and visual lesson calendars using Gemini AI and Imagen 3.0.",
     tags: ["Gemini 2.5 Flash", "Imagen 3.0", "Next.js 15", "TypeScript", "PostgreSQL", "Drizzle ORM", "NextAuth.js", "Tailwind CSS"],
