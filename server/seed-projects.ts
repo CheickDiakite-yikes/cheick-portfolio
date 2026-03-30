@@ -193,6 +193,15 @@ const REQUIRED_PROJECTS = [
     sourceUrl: null as string | null,
     createdAt: "2026-02-19 03:15:00.000",
   },
+  {
+    title: "Sunset Blooms",
+    description: "Elegant flower subscription platform for a Brattleboro, Vermont florist—hand-cultivated seasonal bouquets delivered weekly, biweekly, monthly, or quarterly with an editorial-style gallery and subscription management.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Subscription Platform"],
+    color: "pink",
+    liveUrl: "https://sunsetblooms.replit.app",
+    sourceUrl: null as string | null,
+    createdAt: "2026-02-19 03:10:00.000",
+  },
 ];
 
 export async function seedProjects() {

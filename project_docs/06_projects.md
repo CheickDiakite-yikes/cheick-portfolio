@@ -908,3 +908,48 @@ A comprehensive platform dedicated to sustainable water infrastructure powered b
 - Reduces carbon footprint of water systems
 - Supports sustainable development goals
 - Promotes community water independence
+
+---
+
+## 22. Sunset Blooms
+**Overview:** Elegant flower subscription platform for a Brattleboro, Vermont florist—hand-cultivated seasonal bouquets delivered weekly, biweekly, monthly, or quarterly with an editorial-style gallery and subscription management.
+
+**Links:**
+- [Live Site](https://sunsetblooms.replit.app)
+- [Video Demo](https://www.youtube.com/embed/vwiGAZpCTDQ)
+
+**Tech Stack:** React, TypeScript, Vite, Tailwind CSS, Subscription Platform
+
+### Readme
+# Sunset Blooms
+## Your Garden, Delivered
+
+A beautiful flower subscription platform built for Maddy, a florist in Brattleboro, Vermont. Customers choose their delivery cadence and receive hand-cultivated, artfully arranged seasonal bouquets straight from the garden to their door.
+
+### SUBSCRIPTION TIERS
+- **Weekly Blooms** — Fresh bouquets every 7 days ($45/week)
+- **Biweekly Bouquets** — Lavish delivery every 2 weeks ($75/biweekly)
+- **Monthly Garden** — Grand statement piece monthly ($120/month)
+- **Quarterly Collection** — Four seasonal masterpieces a year ($200/quarter)
+
+### KEY FEATURES
+
+**🌸 Curated Collections**
+- Sourced from exclusive growers for vibrant, long-lasting blooms
+- Selections shift with the seasons celebrating rare, unexpected varieties
+- Designed with an editorial eye — never ordinary
+
+**📸 Editorial Gallery**
+- Lightbox-style arrangement showcase with click-to-explore
+- Featured arrangements highlighted with seasonal photography
+- Full gallery with 10+ named arrangements
+
+**🚚 From Garden to Door**
+- Seasonal blooms hand-cultivated by Maddy in Brattleboro, VT
+- Same-day harvest to doorstep delivery
+- Subscription cadence tailored to customer rhythm
+
+### TECH STACK
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS
+- **UI:** Smooth animations, responsive mobile-first design
+- **Commerce:** Subscription tier selection and management
