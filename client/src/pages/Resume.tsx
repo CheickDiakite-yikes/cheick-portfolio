@@ -49,10 +49,7 @@ const experience = [
     location: "Boston, MA",
     date: "May 2024 - Current",
     points: [
-      "US-based Venture and Techstars-backed B2B AI Startup for Private Equity with $440K 2025E Revenue.",
-      "Develop and launch AI tools on GCP and Gemini for investment due diligence and memos; cut memo first-draft time 70-90%.",
-      "Designed RAG pipelines on Replit PostgreSQL and implemented hybrid search (semantic + keyword) to reduce hallucinations by 40%.",
-      "Converted pilots to paid enterprise design-partners across 15 firms (e.g., HIG, Moelis) by translating 110+ user interviews into roadmap execution.",
+      "Founder of an AI-powered platform designed to augment and eventually automate the role of a financial analyst from end-to-end. DiDi is a TechStars portfolio company.",
     ],
     transactions: [],
   },
