@@ -47,7 +47,7 @@ const experience = [
     title: "Founding Product & Lead AI Engineer (Techstars)",
     company: "DiDi Inc.",
     location: "Boston, MA",
-    date: "May 2024 - Current",
+    date: "May 2024 - December 2025",
     points: [
       "Founder of an AI-powered platform designed to augment and eventually automate the role of a financial analyst from end-to-end. DiDi is a TechStars portfolio company.",
     ],
